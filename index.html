@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1B1C1A">
+<title>Imagine World IT</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Imagine World IT S.A.S. — Asesoría minero-ambiental y comercialización de minerales con trazabilidad en Colombia. Lo pensamos, lo hacemos.">
+<script>
+/* idioma antes de pintar: ?lang=en en la URL > lo último que eligió el visitante > español */
+(function(){ var d = document.documentElement, l = null;
+  try { l = new URLSearchParams(location.search).get("lang"); } catch(e){}
+  if (l !== "es" && l !== "en") { try { l = localStorage.getItem("iwit-lang"); } catch(e){} }
+  if (l === "es" || l === "en") { d.dataset.lang = l; d.lang = l; } })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a mine-site dossier. Dark carbon "field" bands carry the imagery (hero + 3 scroll scenes);
+   light roca bands carry the paperwork (registry facts, services, process). One look, light-first, by choice. */
+:root{
+  --roca:#F5F2EB;      /* fondo general: papel cálido, no blanco de oficina */
+  --plataforma:#FFFDF8;/* superficies */
+  --carbon:#252525;    /* texto y bandas oscuras */
+  --carbon-2:#1B1C1A;  /* fondo de escenas */
+  --verde:#6D9241;     /* marca */
+  --verde-ink:#4F6F2B; /* verde para texto sobre claro */
+  --verde-lt:#9CC26B;  /* verde para texto sobre oscuro */
+  --cobre:#B5672E;     /* acento comercial */
+  --cobre-lt:#D9915A;  /* cobre sobre oscuro */
+  --arena:#D9D2C3;
+  --linea:#E3DDD0;
+  --muted:#5F625B;
+  --hand:"Caveat","Segoe Print","Bradley Hand",cursive; /* notas a mano: el toque humano */
+  --radius:10px;
+  --muted-dk:#A9ABA3;
+  --display:"Cinzel","Trajan Pro",Georgia,serif;          /* títulos: remates clásicos, aire de joyería */
+  --accent:"Playfair Display",Georgia,"Times New Roman",serif; /* itálica para slogan y palabras clave */
+  --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --gutter-l:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  --max:1200px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:clip}
+body{margin:0;background:var(--roca);color:var(--carbon);font-family:var(--body);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,video,canvas{max-width:100%;display:block}
+a{color:var(--verde-ink)}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;line-height:1.04;margin:0;text-wrap:balance;letter-spacing:.015em;font-weight:600}
+h1 em,h2 em{font-family:var(--accent);font-style:italic;font-weight:500;text-transform:none;letter-spacing:0}
+p{margin:0}
+:focus-visible{outline:2px solid var(--verde);outline-offset:3px;border-radius:2px}
+
+/* idioma: un clic para ES, otro para EN */
+:root[data-lang="es"] body [lang="en"]{display:none!important}
+:root[data-lang="en"] body [lang="es"]{display:none!important}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.dark .eyebrow{color:var(--muted-dk)}
+
+/* ---------- header ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--roca)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--roca) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--carbon);flex:none}
+.brand svg{height:38px;width:auto}
+.brand b{font-family:var(--display);font-weight:700;font-size:1.12rem;letter-spacing:.04em;line-height:1;text-transform:uppercase}
+.brand small{display:block;font-family:var(--accent);font-style:italic;font-size:.8rem;color:var(--muted);letter-spacing:0;text-transform:none;margin-top:2px}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{font-family:var(--body);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--carbon);text-decoration:none;padding:8px 10px;border-radius:4px}
+.nav a:hover{background:var(--plataforma)}
+.lang{display:flex;border:1px solid var(--carbon);border-radius:4px;overflow:hidden;flex:none}
+.lang button{all:unset;cursor:pointer;font-family:var(--mono);font-size:.76rem;font-weight:500;padding:6px 10px;color:var(--carbon)}
+.lang button[aria-pressed="true"]{background:var(--carbon);color:var(--roca)}
+.lang button:focus-visible{outline:2px solid var(--verde);outline-offset:-2px}
+.btn{display:inline-flex;align-items:center;gap:10px;max-width:100%;font-family:var(--body);font-weight:700;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border-radius:999px;border:1.5px solid transparent;transition:transform .2s ease,background .2s ease;cursor:pointer;line-height:1.1}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-verde{background:var(--verde);color:#fff}
+.btn-verde:hover{background:var(--verde-ink);transform:translateY(-1px)}
+.btn-ghost{border-color:currentColor;color:var(--roca)}
+.btn-ghost:hover{background:rgba(243,244,241,.1)}
+.btn-sm{padding:10px 14px;font-size:.78rem}
+.top .btn-sm{flex:none}
+
+/* ---------- hero ---------- */
+.dark{background:var(--carbon-2);color:var(--roca)}
+.hero{position:relative;overflow:hidden;isolation:isolate}
+.hero .media{position:absolute;inset:0;z-index:-2}
+.hero .media canvas,.hero .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .media canvas.gl{z-index:1;opacity:0;transition:opacity .8s ease}
+.hero .media.gl-on canvas.gl{opacity:1}
+.hero .media.gl-on > canvas[data-scene],.hero .media.gl-on > img{display:none}
+.hero .wrap{position:relative;z-index:1;pointer-events:none}
+.hero .wrap a,.hero .wrap button{pointer-events:auto}
+.scroll-cue{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dk)}
+.scroll-cue i{width:1px;height:34px;background:linear-gradient(var(--verde-lt),transparent);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;left:0;top:-40%;width:1px;height:40%;background:var(--roca);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{to{top:110%}}
+.hero .media img{transform:scale(calc(1.06 + var(--hp,0)*.08)) translateY(calc(var(--hp,0)*30px));transform-origin:70% 50%;transition:opacity .8s ease}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(27,28,26,.94) 0%,rgba(27,28,26,.78) 42%,rgba(27,28,26,.25) 75%,rgba(27,28,26,.1) 100%),linear-gradient(0deg,rgba(27,28,26,.9) 0%,transparent 35%)}
+.hero .wrap{padding-block:clamp(56px,10vw,120px) 0;display:grid;gap:28px}
+.hero h1{font-weight:600;font-size:clamp(2.5rem,6.4vw,5.4rem);max-width:13ch;line-height:1.02}
+.hero h1 em{font-size:1.08em}
+.hero h1 em{font-style:normal;color:var(--cobre-lt)}
+.hero .lead{font-size:clamp(1.05rem,1.8vw,1.25rem);max-width:54ch;color:#DADBD5}
+.slogan{font-family:var(--hand);font-weight:700;font-size:1.9rem;line-height:1;color:var(--verde-lt);display:flex;align-items:center;gap:12px;transform:rotate(-1.5deg);transform-origin:left center}
+.slogan::before{content:"";width:36px;height:2px;background:var(--verde)}
+/* lectura topográfica que sigue al cursor sobre el tajo 3D */
+.survey{position:absolute;z-index:0;left:0;top:0;pointer-events:none;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--roca);white-space:nowrap;
+  padding:5px 9px;border-radius:6px;background:rgba(27,28,26,.72);border:1px solid rgba(217,145,90,.55);opacity:0;transition:opacity .3s ease;will-change:transform}
+.survey b{color:var(--cobre-lt);font-weight:500}
+.survey.on{opacity:1}
+.hint{display:inline-flex;align-items:center;gap:8px;font-family:var(--hand);font-size:1.3rem;color:var(--cobre-lt);line-height:1}
+.hint svg{width:22px;height:22px;flex:none}
+.hint .touch{display:none}
+.hint[hidden]{display:none}
+@media (hover:none){ .hint .mouse{display:none} .hint .touch{display:inline} }
+.hero-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.coords{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);font-size:.74rem;color:var(--muted-dk);letter-spacing:.06em;padding-block:28px 22px;border-top:1px solid rgba(243,244,241,.14);margin-top:clamp(28px,6vw,64px)}
+.coords span b{color:var(--roca);font-weight:500}
+
+/* ---------- autoridad / registro ---------- */
+.registro{background:var(--plataforma);border-bottom:1px solid var(--linea)}
+.registro .wrap{padding-block:0}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.fact{padding:26px 22px;border-left:1px solid var(--linea);display:flex;flex-direction:column;gap:6px;min-width:0}
+.fact:first-child{border-left:0;padding-left:0}
+.fact .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fact .v{font-family:var(--body);font-weight:700;font-size:1.45rem;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.fact .s{font-size:.88rem;color:var(--muted);line-height:1.4}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;width:fit-content}
+.pill.ok{background:#E6EEDB;color:var(--verde-ink)}
+.pill.ok::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--verde)}
+.pill.wait{border:1px dashed var(--cobre);color:var(--cobre)}
+
+/* ---------- sections ---------- */
+section.band{padding-block:clamp(72px,10vw,128px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:28px 56px;align-items:end;margin-bottom:clamp(36px,5vw,60px)}
+.sec-head h2{font-size:clamp(1.9rem,4vw,3.2rem)}
+.sec-head p{color:var(--muted);font-size:1.08rem;max-width:56ch}
+.sec-head .eyebrow{grid-column:1/-1;margin-bottom:-12px}
+
+/* servicios asesoría */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:var(--radius);overflow:hidden}
+.svc{background:var(--plataforma);padding:28px 26px 30px;display:flex;flex-direction:column;gap:12px;min-width:0;transition:background .25s ease}
+.svc:hover{background:#FAFBF8}
+.svc .tag{font-family:var(--mono);font-size:.72rem;color:var(--verde-ink);letter-spacing:.08em}
+.svc h3{font-size:1.18rem;font-weight:700;letter-spacing:.02em}
+.svc p{color:var(--muted);font-size:.98rem}
+.svc .term{margin-top:auto;padding-top:14px;border-top:1px dashed var(--linea);font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+
+/* ---------- scroll scenes ---------- */
+.scene{position:relative;height:210vh;background:var(--carbon-2);color:var(--roca)}
+.scene-pin{position:sticky;top:calc(env(safe-area-inset-top,0px) + 68px);height:calc(100vh - 68px - env(safe-area-inset-top,0px));height:calc(100svh - 68px - env(safe-area-inset-top,0px));overflow:hidden;display:grid}
+.scene-frame{position:absolute;inset:0;overflow:hidden;
+  clip-path:inset(calc((1 - var(--e,0)) * 9%) calc((1 - var(--e,0)) * 14%) round calc((1 - var(--e,0)) * 14px))}
+.scene-frame canvas,.scene-frame img,.scene-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.scene-frame img,.scene-frame video{transform:scale(calc(1.18 - var(--e,0)*.12)) translateY(calc((var(--p,0) - .5) * -40px))}
+.scene-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(27,28,26,.92) 0%,rgba(27,28,26,.35) 45%,rgba(27,28,26,.15) 100%)}
+.scene-frame [data-loaded]{transition:opacity .8s ease}
+.scene-copy{position:relative;z-index:2;align-self:end;padding-block:0 clamp(28px,6vh,64px)}
+.scene-copy .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px 48px;align-items:end}
+.scene-copy h2{font-size:clamp(1.9rem,4.8vw,4rem);line-height:1.04}
+.scene-copy h2 em{font-style:normal;color:var(--cobre-lt)}
+.scene-steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.scene-steps li{border-left:2px solid rgba(243,244,241,.22);padding:4px 0 4px 14px;color:var(--muted-dk);transition:color .35s ease,border-color .35s ease,transform .35s ease}
+.scene-steps li b{display:block;font-family:var(--display);font-weight:700;font-size:.98rem;letter-spacing:.06em;text-transform:uppercase;color:inherit}
+.scene-steps li.on{color:var(--roca);border-color:var(--verde);transform:translateX(4px)}
+.scene-steps li.on b{color:var(--verde-lt)}
+.scene-tag{position:absolute;z-index:2;top:22px;left:var(--gutter-l);font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-dk);display:flex;gap:14px;flex-wrap:wrap;right:var(--gutter-r)}
+.scene-tag .rec{color:var(--cobre-lt)}
+.progress{position:absolute;z-index:2;left:0;bottom:0;height:3px;width:calc(var(--p,0)*100%);background:var(--verde)}
+
+/* ---------- proceso (sequence) ---------- */
+.proc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:paso;border-top:2px solid var(--carbon)}
+.proc li{list-style:none;counter-increment:paso;padding:22px 20px 8px 0;display:flex;flex-direction:column;gap:8px;min-width:0;position:relative}
+.proc li::before{content:"Paso " counter(paso);font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cobre)}
+:root[data-lang="en"] .proc li::before{content:"Step " counter(paso)}
+.proc li::after{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;background:var(--roca);border:2px solid var(--carbon)}
+.proc li:last-child::after{background:var(--verde);border-color:var(--verde)}
+.proc h3{font-size:1.02rem;font-weight:700}
+.proc p{font-size:.94rem;color:var(--muted)}
+.proc{padding:0}
+
+/* comercialización */
+.com-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:clamp(48px,6vw,72px)}
+.mineral{background:var(--plataforma);border:1px solid var(--linea);border-top:3px solid var(--cobre);border-radius:var(--radius);padding:30px 28px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 20px;min-width:0}
+.mineral{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease;will-change:transform}
+.mineral:hover{box-shadow:0 24px 50px -24px rgba(37,37,37,.35)}
+.gem{grid-row:span 3;position:relative;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 50% 45%,#2E2F2B 0%,#1B1C1A 70%);overflow:hidden}
+.gem canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.gem canvas:active{cursor:grabbing}
+.gem .drag{position:absolute;right:10px;top:8px;font-family:var(--hand);font-size:1.05rem;color:var(--cobre-lt);pointer-events:none;transition:opacity .4s ease}
+.gem.touched .drag{opacity:0}
+.gem .sym{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:#A9ABA3;pointer-events:none}
+.gem .sym b{display:block;font-family:var(--display);font-size:1.1rem;color:#F3F4F1;letter-spacing:.02em}
+.mineral h3{font-size:1.3rem;font-weight:700}
+.mineral p{color:var(--muted);font-size:.98rem}
+.mineral ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.mineral li{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;border:1px solid var(--linea);padding:3px 8px;border-radius:3px;color:var(--carbon)}
+.mineral.agregados{border-top-color:var(--verde)}
+
+/* ambiental list in light band */
+.amb{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.amb div{display:flex;flex-direction:column;gap:8px;padding-top:16px;border-top:1px solid var(--carbon);min-width:0}
+.amb h3{font-size:1.08rem;font-weight:700}
+.amb p{color:var(--muted);font-size:.96rem}
+
+/* ---------- nosotros: nota del equipo ---------- */
+.nosotros .wrap{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:40px 64px;align-items:start}
+.nota{position:relative;background:var(--plataforma);border:1px solid var(--linea);border-radius:var(--radius);padding:clamp(26px,4vw,44px);box-shadow:0 1px 0 var(--linea),0 22px 40px -30px rgba(37,37,37,.35);transform:rotate(-.6deg)}
+.nota::before{content:"";position:absolute;top:-12px;left:50%;width:92px;height:24px;transform:translateX(-50%) rotate(2deg);background:rgba(156,194,107,.45);border-radius:2px}
+.nota h2{font-size:clamp(1.7rem,3.4vw,2.6rem);margin:10px 0 18px}
+.nota h2 em{color:var(--cobre)}
+.nota p{font-size:1.06rem;color:#3E403B;margin-bottom:14px}
+.nota .firma{font-family:var(--hand);font-size:1.7rem;color:var(--verde-ink);line-height:1.1;margin:22px 0 0}
+.nota .firma small{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.promesas{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.promesas li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 16px;align-items:start}
+.promesas .n{grid-row:span 2;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--hand);font-size:1.6rem;font-weight:700;color:var(--cobre);border:1.5px dashed var(--cobre)}
+.promesas h3{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:1.12rem;font-weight:700}
+.promesas p{color:var(--muted);font-size:.98rem}
+
+/* ---------- preguntas frecuentes ---------- */
+.faq{max-width:820px}
+.faq details{border-bottom:1px solid var(--linea)}
+.faq details:first-of-type{border-top:1px solid var(--linea)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 2px;font-weight:600;font-size:1.08rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--linea);color:var(--verde-ink);font-size:1.2rem;transition:transform .25s ease,background .25s ease}
+.faq details[open] summary::after{transform:rotate(45deg);background:#E6EEDB}
+.faq summary:hover{color:var(--verde-ink)}
+.faq details p{padding:0 2px 22px;color:var(--muted);max-width:68ch}
+
+/* ---------- CTA final ---------- */
+.final .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center;padding-block:clamp(72px,10vw,120px)}
+.final h2{font-size:clamp(2rem,4.4vw,3.6rem)}
+.final h2 em{font-style:normal;color:var(--verde-lt)}
+.final p{color:#CFD0CA;max-width:50ch;margin-top:18px}
+.contact{background:#262724;border:1px solid #34362F;border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.contact .row{display:flex;flex-direction:column;gap:2px}
+.contact .row .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-dk)}
+.contact .row .v{font-family:var(--body);font-size:1.3rem;font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere;user-select:all}
+.contact .row .v.small{font-family:var(--body);font-size:1rem;font-weight:500;letter-spacing:0}
+.copy{all:unset;cursor:pointer;font-family:var(--mono);font-size:.72rem;color:var(--verde-lt);width:fit-content;border-bottom:1px solid currentColor}
+.copy:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
+
+footer{background:var(--carbon);color:var(--muted-dk);font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px 32px;justify-content:space-between;align-items:center;padding-block:28px}
+footer .brand{color:var(--roca)}
+footer .brand small{color:var(--muted-dk)}
+footer .legal{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;line-height:1.7}
+footer a{color:var(--verde-lt)}
+
+/* whatsapp flotante */
+.wa-float{position:fixed;z-index:40;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(37,37,37,.28);transition:transform .2s ease}
+.wa-float:hover{transform:scale(1.06)}
+.wa-float svg{width:28px;height:28px}
+
+.toast{position:fixed;z-index:70;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--carbon);color:var(--roca);font-size:.88rem;padding:8px 14px;border-radius:999px}
+
+/* reveal: elements rest visible; only a gentle rise when scrolled in */
+.rise{transition:transform .9s cubic-bezier(.2,.7,.2,1),clip-path 1.1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rise.below{transform:translateY(36px) rotateX(8deg)}
+.rise h2{transition:clip-path 1.2s cubic-bezier(.2,.7,.2,1) .1s,transform 1.2s cubic-bezier(.2,.7,.2,1) .1s}
+.rise.below h2{clip-path:inset(0 0 100% 0);transform:translateY(30%)}
+.band .wrap{perspective:1200px}
+.svc-grid .svc:nth-child(3n+2){--d:.08s}.svc-grid .svc:nth-child(3n){--d:.16s}
+.proc li{transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .8s ease}
+.proc.below li{transform:translateX(-18px)}
+.proc li:nth-child(2){transition-delay:.08s}.proc li:nth-child(3){transition-delay:.16s}.proc li:nth-child(4){transition-delay:.24s}.proc li:nth-child(5){transition-delay:.32s}
+.proc.below{transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1240px){
+  .nav a{padding:8px 7px;letter-spacing:.08em}
+  .top .btn-sm .lbl{display:none}
+  .top .btn-sm{padding:10px 11px}
+}
+@media (max-width:1060px){
+  .nav{display:none}
+  .lang{margin-left:auto}
+}
+@media (max-width:980px){
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact:nth-child(3){border-left:0;padding-left:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--linea)}
+  .sec-head,.scene-copy .wrap,.final .wrap{grid-template-columns:minmax(0,1fr)}
+  .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .proc{grid-template-columns:minmax(0,1fr);border-top:0;border-left:2px solid var(--carbon);padding-left:22px}
+  .proc li{padding:4px 0 22px}
+  .proc li::after{top:6px;left:-30px}
+  .amb{grid-template-columns:minmax(0,1fr)}
+  .lang{margin-left:auto}
+  .com-grid{grid-template-columns:minmax(0,1fr)}   /* 2 tarjetas con gema no caben a esta anchura */
+  .nosotros .wrap{grid-template-columns:minmax(0,1fr)}
+  /* en tablet/celular el texto ocupa todo el ancho: oscurecer de abajo hacia arriba, no de lado */
+  .hero::after{background:linear-gradient(0deg,rgba(27,28,26,.95) 0%,rgba(27,28,26,.78) 45%,rgba(27,28,26,.35) 80%,rgba(27,28,26,.2) 100%)}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  html{scroll-padding-top:72px}
+  .top .wrap{gap:10px;min-height:60px}
+  .brand svg{height:32px}
+  .brand b{font-size:.92rem}
+  .brand small{display:none}
+  .top .btn-sm .lbl{display:none}
+  .top .btn-sm{padding:9px 10px}
+  .facts{grid-template-columns:minmax(0,1fr)}
+  .fact{border-left:0!important;padding-left:0!important;border-top:1px solid var(--linea);padding-block:18px}
+  .fact:first-child{border-top:0}
+  .svc-grid{grid-template-columns:minmax(0,1fr)}
+  .mineral{grid-template-columns:minmax(0,1fr);padding:22px 20px}
+  .gem{grid-row:auto;width:100%;height:200px;border-radius:8px}
+  .scene{height:180vh}
+  .scene-pin{top:calc(env(safe-area-inset-top,0px) + 60px);height:calc(100svh - 60px - env(safe-area-inset-top,0px))}
+  .scene-steps li{font-size:.92rem}
+  /* que el texto de la escena quepa en pantallas bajitas: solo el paso activo muestra su detalle */
+  .scene-steps li:not(.on) > span{display:none}
+  .scene-tag{top:14px}
+  .btn{font-size:.8rem;padding:13px 18px}
+  .hero .cta-row .btn{flex:1 1 220px;justify-content:center}
+  .slogan{font-size:1.6rem}
+  .coords{gap:4px 16px}
+  .wa-float{width:52px;height:52px}
+  .nota{transform:none}
+  .promesas li{grid-template-columns:38px minmax(0,1fr)}
+  .promesas .n{width:38px;height:38px;font-size:1.35rem}
+}
+@media (max-width:380px){
+  .brand b{font-size:.8rem;letter-spacing:.02em}
+  .lang button{padding:6px 8px}
+}
+/* celular acostado / pantallas muy bajas: las escenas fijas no caben, se muestran como bloques normales */
+@media (max-height:520px){
+  .scene{height:auto}
+  .scene-pin{position:relative;top:0;height:auto;min-height:100vh}
+  .scene-copy{padding-top:120px}
+  .scene-steps li:not(.on) > span{display:inline}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .scene{height:auto}
+  .scene-pin{position:relative;top:0;height:auto;min-height:88vh}
+  .scene-frame{clip-path:none}
+  .scene-frame img,.scene-frame video,.hero .media img{transform:none!important}
+  .rise.below,.proc.below li{transform:none}
+  .rise.below h2{clip-path:none;transform:none}
+  .scroll-cue i::after{animation:none}
+  .btn,.svc,.wa-float{transition:none}
+  .nota{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Imagine World IT, inicio" data-aria-es="Imagine World IT, inicio" data-aria-en="Imagine World IT, home">
+      <svg viewBox="0 0 28 56" aria-hidden="true"><rect x="0" y="0" width="28" height="56" fill="#6D9241"/><rect x="7.5" y="7.5" width="13" height="41" fill="none" stroke="#FFFFFF" stroke-width="2.6"/><rect x="11.2" y="11.2" width="5.6" height="33.6" fill="#4F6F2B"/></svg>
+      <span><b>Imagine World IT</b><small>Lo pensamos, lo hacemos</small></span>
+    </a>
+    <nav class="nav" aria-label="Secciones" data-aria-es="Secciones" data-aria-en="Sections">
+      <a href="#nosotros"><span lang="es">Nosotros</span><span lang="en">About</span></a>
+      <a href="#asesoria"><span lang="es">Asesoría</span><span lang="en">Advisory</span></a>
+      <a href="#comercializacion"><span lang="es">Comercialización</span><span lang="en">Trading</span></a>
+      <a href="#ambiental"><span lang="es">Ambiental</span><span lang="en">Environment</span></a>
+      <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" id="lang-es" data-set-lang="es" aria-pressed="true">ES</button>
+      <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-verde btn-sm" data-wa href="https://wa.me/573173000807" target="_blank" rel="noopener" aria-label="Diagnóstico gratis por WhatsApp" data-aria-es="Diagnóstico gratis por WhatsApp" data-aria-en="Free assessment on WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+      <span class="lbl"><span lang="es">Diagnóstico gratis</span><span lang="en">Free assessment</span></span>
+    </a>
+  </div>
+</header>
+
+<main id="inicio">
+<!-- ====== HERO ====== -->
+<section class="hero dark" aria-labelledby="h-hero">
+  <div class="media" data-slot="hero" id="hero-media"><canvas data-scene="hero" aria-hidden="true"></canvas><canvas class="gl" id="hero-gl" aria-hidden="true"></canvas></div>
+  <div class="survey" id="survey" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="eyebrow"><span lang="es">Asesoría minero-ambiental · Comercialización de minerales · Colombia</span><span lang="en">Mining &amp; environmental advisory · Mineral trading · Colombia</span></span>
+    <h1 id="h-hero"><span lang="es">Minería legal. Mineral con <em>origen.</em></span><span lang="en">Legal mining. Minerals with <em>origin.</em></span></h1>
+    <p class="lead"><span lang="es">Te ayudamos a poner en regla tu título, tu licencia y tu PTO. Y cuando el material sale, lo comercializamos con certificado de origen y todo el expediente, para que quien compra sepa exactamente de dónde viene.</span><span lang="en">We help you get your mining title, environmental license and work plan (PTO) in order. When the material ships, we trade it with a certificate of origin and the complete file, so the buyer knows exactly where it comes from.</span></p>
+    <p class="slogan"><span lang="es">Lo pensamos, lo hacemos</span><span lang="en">We think it, we do it</span></p>
+    <div class="cta-row">
+      <a class="btn btn-verde" data-wa href="https://wa.me/573173000807" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+        <span lang="es">Diagnóstico gratis por WhatsApp</span><span lang="en">Free assessment on WhatsApp</span>
+      </a>
+      <a class="btn btn-ghost" href="#asesoria"><span lang="es">Ver servicios</span><span lang="en">See services</span></a>
+    </div>
+    <div class="hero-foot" aria-hidden="true">
+      <span class="scroll-cue"><i></i><span lang="es">Baja para sobrevolar el tajo</span><span lang="en">Scroll to fly over the pit</span></span>
+      <span class="hint" id="hero-hint" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 18c3-1 5-4 6-8M10 10l-3 1M10 10l1 3"/></svg>
+        <span class="mouse"><span lang="es">pasa el mouse por el terreno y haz clic</span><span lang="en">hover over the terrain and click</span></span>
+        <span class="touch"><span lang="es">toca el terreno para medirlo</span><span lang="en">tap the terrain to survey it</span></span>
+      </span>
+    </div>
+    <div class="coords" aria-label="Datos de sede" data-aria-es="Datos de sede" data-aria-en="Company details">
+      <span><b>10°59′N 74°47′W</b> · Barranquilla</span>
+      <span>NIT <b>901.710.620-1</b></span>
+      <span><span lang="es">Matrícula</span><span lang="en">Registry</span> <b>868115</b> · CC Barranquilla</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== REGISTRO / AUTORIDAD ====== -->
+<section class="registro" aria-label="Datos legales" data-aria-es="Datos legales" data-aria-en="Legal details">
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact">
+        <span class="k">NIT</span>
+        <span class="v">901.710.620-1</span>
+        <span class="pill ok"><span lang="es">Matrícula activa</span><span lang="en">Active registration</span></span>
+      </div>
+      <div class="fact">
+        <span class="k">RUCOM</span>
+        <span class="v" data-rucom>—</span>
+        <span class="pill wait" data-rucom-pill><span lang="es">Número en verificación</span><span lang="en">Number being verified</span></span>
+      </div>
+      <div class="fact">
+        <span class="k"><span lang="es">Cámara de Comercio</span><span lang="en">Chamber of Commerce</span></span>
+        <span class="v">Barranquilla</span>
+        <span class="s"><span lang="es">S.A.S. inscrita desde 2023 · renovada 2026</span><span lang="en">S.A.S. registered 2023 · renewed 2026</span></span>
+      </div>
+      <div class="fact">
+        <span class="k"><span lang="es">Regiones de operación</span><span lang="en">Operating regions</span></span>
+        <span class="v" data-regiones>Atlántico</span>
+        <span class="s" data-regiones-note><span lang="es">Sede en Barranquilla · atención en todo el país</span><span lang="en">Based in Barranquilla · nationwide service</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== NOSOTROS: nota del equipo (edita el texto con tu propia voz) ====== -->
+<section class="band nosotros" id="nosotros" aria-labelledby="h-nos">
+  <div class="wrap">
+    <article class="nota rise">
+      <span class="eyebrow"><span lang="es">Quiénes somos</span><span lang="en">Who we are</span></span>
+      <h2 id="h-nos"><span lang="es">Hola, somos de <em>Barranquilla</em></span><span lang="en">Hi, we're from <em>Barranquilla</em></span></h2>
+      <p><span lang="es">Sabemos que un requerimiento de la ANM o de la CAR puede quitar el sueño. Por eso, cuando nos escribes, no te contesta un formulario: te responde una persona que lee tu caso completo y te dice, en palabras sencillas, qué está bien, qué está pendiente y qué hacer primero.</span><span lang="en">We know a letter from the mining agency (ANM) or the environmental authority can keep you up at night. So when you write to us, no form answers you: a real person reads your whole case and tells you, in plain words, what's fine, what's pending and what to do first.</span></p>
+      <p><span lang="es">Trabajamos con mineros pequeños y medianos, canteras y compradores que quieren hacer las cosas bien. Nuestra regla es sencilla: lo que pensamos contigo, lo hacemos contigo.</span><span lang="en">We work with small and mid-size miners, quarries and buyers who want to do things right. Our rule is simple: what we plan with you, we carry out with you.</span></p>
+      <p class="firma"><span lang="es">— El equipo de Imagine World IT</span><span lang="en">— The Imagine World IT team</span><small><span lang="es">Barranquilla, desde 2023</span><span lang="en">Barranquilla, since 2023</span></small></p>
+    </article>
+    <ol class="promesas">
+      <li class="rise"><span class="n">1</span><h3><span lang="es">Te hablamos claro</span><span lang="en">We speak plainly</span></h3><p><span lang="es">Sin jerga de ventanilla. Si algo es grave te lo decimos, y si no lo es, también.</span><span lang="en">No bureaucratic jargon. If something is serious we tell you, and if it isn't, we tell you that too.</span></p></li>
+      <li class="rise"><span class="n">2</span><h3><span lang="es">Te respondemos hoy</span><span lang="en">We reply today</span></h3><p><span lang="es">Escríbenos por WhatsApp y te contestamos el mismo día hábil.</span><span lang="en">Message us on WhatsApp and we'll answer the same business day.</span></p></li>
+      <li class="rise"><span class="n">3</span><h3><span lang="es">Solo lo legal</span><span lang="en">Legal only</span></h3><p><span lang="es">No movemos material sin origen comprobado. Así te protegemos a ti y a quien compra.</span><span lang="en">We don't move material without proven origin. That protects you and the buyer.</span></p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== ESCENA 1: OPERACIÓN ====== -->
+<section class="scene" data-scene-section aria-labelledby="h-op">
+  <div class="scene-pin">
+    <div class="scene-frame" data-slot="operacion"><canvas data-scene="pit" aria-hidden="true"></canvas></div>
+    <div class="scene-tag"><span class="rec">● <span lang="es">Operación minera</span><span lang="en">Mining operation</span></span><span>01 / 03</span></div>
+    <div class="scene-copy">
+      <div class="wrap">
+        <h2 id="h-op"><span lang="es">Un título minero se pierde por <em>papeles</em>, no por falta de mineral.</span><span lang="en">Mining titles are lost over <em>paperwork</em>, not for lack of ore.</span></h2>
+        <ol class="scene-steps" data-steps>
+          <li class="on"><b><span lang="es">Revisamos tu título</span><span lang="en">We review your title</span></b><span lang="es">Contrato de concesión, obligaciones vencidas y pagos pendientes con la ANM.</span><span lang="en">Concession contract, overdue obligations and pending ANM payments.</span></li>
+          <li><b><span lang="es">Te decimos qué falta</span><span lang="en">We tell you what's missing</span></b><span lang="es">PTO, licencia ambiental, informes y canon, en orden de urgencia.</span><span lang="en">PTO, environmental license, reports and fees, by urgency.</span></li>
+          <li><b><span lang="es">Lo resolvemos contigo</span><span lang="en">We solve it with you</span></b><span lang="es">Radicamos, respondemos requerimientos y hacemos el seguimiento.</span><span lang="en">We file, answer agency requests and follow up.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="progress" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ====== ASESORÍA ====== -->
+<section class="band" id="asesoria" aria-labelledby="h-ases">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <span class="eyebrow"><span lang="es">Servicio 1 · Asesoría minero-ambiental</span><span lang="en">Service 1 · Mining &amp; environmental advisory</span></span>
+      <h2 id="h-ases"><span lang="es">Tu mina, en regla ante la ANM y la autoridad ambiental</span><span lang="en">Your mine, compliant with ANM and environmental authorities</span></h2>
+      <p><span lang="es">Atendemos titulares mineros, canteras, areneras y pequeños productores que necesitan legalizar, mantener o defender su operación. El primer diagnóstico es gratis y lo hacemos por WhatsApp.</span><span lang="en">We work with title holders, quarries, sand pits and small producers who need to legalize, maintain or defend their operation. The first assessment is free, over WhatsApp.</span></p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc rise">
+        <span class="tag">LIC · AMB</span>
+        <h3><span lang="es">Licencia ambiental</span><span lang="en">Environmental license</span></h3>
+        <p><span lang="es">Estudio de impacto ambiental, trámite ante la CAR o la ANLA y cumplimiento de las obligaciones de la licencia.</span><span lang="en">Environmental impact study, filing with the regional authority (CAR) or ANLA, and compliance with license obligations.</span></p>
+        <span class="term">EIA · PMA · CAR · ANLA</span>
+      </article>
+      <article class="svc rise">
+        <span class="tag">PTO</span>
+        <h3><span lang="es">Programa de Trabajos y Obras</span><span lang="en">Work &amp; Works Program</span></h3>
+        <p><span lang="es">Elaboración, ajuste y aprobación del PTO. Sin PTO aprobado no se puede explotar, y el título queda en riesgo.</span><span lang="en">Drafting, adjusting and getting the PTO approved. Without it you cannot extract, and the title is at risk.</span></p>
+        <span class="term">PTO · PTI · ANM</span>
+      </article>
+      <article class="svc rise">
+        <span class="tag">FORM</span>
+        <h3><span lang="es">Formalización minera</span><span lang="en">Mining formalization</span></h3>
+        <p><span lang="es">Acompañamos a mineros tradicionales y de pequeña escala en el camino para operar con título y sin sanciones.</span><span lang="en">We guide traditional and small-scale miners toward operating under a title and without penalties.</span></p>
+        <span class="term">ARE · Subcontrato de formalización</span>
+      </article>
+      <article class="svc rise">
+        <span class="tag">ANM</span>
+        <h3><span lang="es">Requerimientos y fiscalización</span><span lang="en">Agency requests &amp; inspections</span></h3>
+        <p><span lang="es">Respondemos requerimientos, preparamos las visitas de fiscalización y evitamos que el título caduque.</span><span lang="en">We answer agency requests, prepare for inspections and keep your title from expiring.</span></p>
+        <span class="term">FBM · Informes · Canon superficiario</span>
+      </article>
+      <article class="svc rise">
+        <span class="tag">RUCOM</span>
+        <h3><span lang="es">Inscripción en RUCOM</span><span lang="en">RUCOM registration</span></h3>
+        <p><span lang="es">Inscripción de productores y comercializadores. Sin RUCOM nadie te puede comprar el mineral de forma legal.</span><span lang="en">Registration for producers and traders. Without RUCOM, no one can legally buy your minerals.</span></p>
+        <span class="term">Registro Único de Comercializadores</span>
+      </article>
+      <article class="svc rise">
+        <span class="tag">DX</span>
+        <h3><span lang="es">Diagnóstico de título</span><span lang="en">Title assessment</span></h3>
+        <p><span lang="es">Un repaso completo de tu expediente: qué está al día, qué está vencido y qué hay que hacer primero.</span><span lang="en">A full review of your file: what's current, what's overdue and what to do first.</span></p>
+        <span class="term"><span lang="es">Gratis · por WhatsApp</span><span lang="en">Free · via WhatsApp</span></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ESCENA 2: TRAZABILIDAD ====== -->
+<section class="scene" data-scene-section aria-labelledby="h-tr">
+  <div class="scene-pin">
+    <div class="scene-frame" data-slot="trazabilidad"><canvas data-scene="route" aria-hidden="true"></canvas></div>
+    <div class="scene-tag"><span class="rec">● <span lang="es">Trazabilidad del mineral</span><span lang="en">Mineral traceability</span></span><span>02 / 03</span></div>
+    <div class="scene-copy">
+      <div class="wrap">
+        <h2 id="h-tr"><span lang="es">Cada carga lleva su <em>historia</em> en papel.</span><span lang="en">Every load carries its <em>history</em> on paper.</span></h2>
+        <ol class="scene-steps" data-steps>
+          <li class="on"><b><span lang="es">Origen verificado</span><span lang="en">Verified origin</span></b><span lang="es">Título vigente y productor inscrito en RUCOM.</span><span lang="en">Valid title and RUCOM-registered producer.</span></li>
+          <li><b><span lang="es">Muestra y análisis</span><span lang="en">Sampling &amp; assay</span></b><span lang="es">Laboratorio que certifica ley y calidad.</span><span lang="en">Lab certification of grade and quality.</span></li>
+          <li><b><span lang="es">Despacho documentado</span><span lang="en">Documented shipment</span></b><span lang="es">Certificado de origen y expediente completo para el comprador.</span><span lang="en">Certificate of origin and complete file for the buyer.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="progress" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ====== COMERCIALIZACIÓN ====== -->
+<section class="band" id="comercializacion" aria-labelledby="h-com" style="background:var(--plataforma)">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <span class="eyebrow"><span lang="es">Servicio 2 · Comercialización de minerales</span><span lang="en">Service 2 · Mineral trading</span></span>
+      <h2 id="h-com"><span lang="es">Compramos y vendemos con la cadena completa</span><span lang="en">We buy and sell with the full chain of custody</span></h2>
+      <p><span lang="es">Conectamos productores legales con compradores que exigen soporte. Así se mueve una operación con nosotros, de la mina al comprador.</span><span lang="en">We connect legal producers with buyers who demand documentation. This is how an operation moves with us, from mine to buyer.</span></p>
+    </div>
+    <ol class="proc rise">
+      <li><h3><span lang="es">Verificamos el origen</span><span lang="en">Verify origin</span></h3><p><span lang="es">Título minero, licencia y RUCOM del productor.</span><span lang="en">Mining title, license and producer's RUCOM.</span></p></li>
+      <li><h3><span lang="es">Muestreo y laboratorio</span><span lang="en">Sampling &amp; lab</span></h3><p><span lang="es">Análisis que certifica ley, pureza o granulometría.</span><span lang="en">Assay of grade, purity or particle size.</span></p></li>
+      <li><h3><span lang="es">Acuerdo comercial</span><span lang="en">Commercial agreement</span></h3><p><span lang="es">Precio, volumen, condiciones de entrega y contraparte validada.</span><span lang="en">Price, volume, delivery terms and a vetted counterparty.</span></p></li>
+      <li><h3><span lang="es">Despacho</span><span lang="en">Shipment</span></h3><p><span lang="es">Transporte con certificado de origen y guías en regla.</span><span lang="en">Transport with certificate of origin and proper waybills.</span></p></li>
+      <li><h3><span lang="es">Entrega con expediente</span><span lang="en">Delivery with file</span></h3><p><span lang="es">El comprador recibe el mineral y toda su documentación.</span><span lang="en">The buyer receives the material and all its paperwork.</span></p></li>
+    </ol>
+    <div class="com-grid">
+      <article class="mineral rise">
+        <div class="gem" aria-hidden="true"><canvas data-gem="metales"></canvas><span class="drag" hidden><span lang="es">¡gíralo!</span><span lang="en">spin it!</span></span></div>
+        <h3><span lang="es">Metales: cobre y oro</span><span lang="en">Metals: copper and gold</span></h3>
+        <p><span lang="es">Comercialización con trazabilidad completa para compradores nacionales e internacionales que necesitan demostrar origen legal.</span><span lang="en">Fully traceable trading for domestic and international buyers who must prove legal origin.</span></p>
+        <ul><li><span lang="es">Certificado de origen</span><span lang="en">Certificate of origin</span></li><li>RUCOM</li><li><span lang="es">Análisis de laboratorio</span><span lang="en">Lab assay</span></li></ul>
+      </article>
+      <article class="mineral agregados rise">
+        <div class="gem" aria-hidden="true"><canvas data-gem="agregados"></canvas><span class="drag" hidden><span lang="es">¡gíralo!</span><span lang="en">spin it!</span></span></div>
+        <h3><span lang="es">Materiales de construcción</span><span lang="en">Construction materials</span></h3>
+        <p><span lang="es">Arena, grava y piedra de canteras con título y licencia, para constructoras y obras que no pueden arriesgarse con material ilegal.</span><span lang="en">Sand, gravel and stone from titled, licensed quarries, for builders and public works that can't risk illegal material.</span></p>
+        <ul><li><span lang="es">Arena</span><span lang="en">Sand</span></li><li><span lang="es">Grava</span><span lang="en">Gravel</span></li><li><span lang="es">Piedra de cantera</span><span lang="en">Quarry stone</span></li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ESCENA 3: AMBIENTAL ====== -->
+<section class="scene" id="ambiental" data-scene-section aria-labelledby="h-amb">
+  <div class="scene-pin">
+    <div class="scene-frame" data-slot="ambiental"><canvas data-scene="water" aria-hidden="true"></canvas></div>
+    <div class="scene-tag"><span class="rec">● <span lang="es">Ingeniería ambiental</span><span lang="en">Environmental engineering</span></span><span>03 / 03</span></div>
+    <div class="scene-copy">
+      <div class="wrap">
+        <h2 id="h-amb"><span lang="es">La licencia no termina al aprobarse: se <em>cumple</em> cada día.</span><span lang="en">A license isn't done once approved: it's <em>kept</em> every day.</span></h2>
+        <ol class="scene-steps" data-steps>
+          <li class="on"><b><span lang="es">Agua</span><span lang="en">Water</span></b><span lang="es">Manejo de vertimientos, sedimentadores y concesiones de agua.</span><span lang="en">Discharge management, settling ponds and water permits.</span></li>
+          <li><b><span lang="es">Suelo y cobertura</span><span lang="en">Soil &amp; cover</span></b><span lang="es">Planes de cierre, revegetalización y compensación.</span><span lang="en">Closure plans, revegetation and offsets.</span></li>
+          <li><b><span lang="es">Informes</span><span lang="en">Reporting</span></b><span lang="es">ICA al día para que la autoridad no tenga de qué sancionar.</span><span lang="en">Compliance reports (ICA) on time, so there's nothing to sanction.</span></li>
+        </ol>
+      </div>
+    </div>
+    <div class="progress" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="band" aria-label="Cumplimiento ambiental" data-aria-es="Cumplimiento ambiental" data-aria-en="Environmental compliance">
+  <div class="wrap">
+    <div class="amb">
+      <div class="rise"><span class="eyebrow">PMA</span><h3><span lang="es">Plan de Manejo Ambiental</span><span lang="en">Environmental Management Plan</span></h3><p><span lang="es">Fichas de manejo realistas para tu operación, que se puedan cumplir y demostrar.</span><span lang="en">Management measures built for your actual operation, easy to comply with and to prove.</span></p></div>
+      <div class="rise"><span class="eyebrow">ICA</span><h3><span lang="es">Seguimiento y reportes</span><span lang="en">Monitoring &amp; reports</span></h3><p><span lang="es">Preparamos los Informes de Cumplimiento Ambiental y acompañamos las visitas de la autoridad.</span><span lang="en">We prepare the compliance reports and accompany authority site visits.</span></p></div>
+      <div class="rise"><span class="eyebrow"><span lang="es">Cierre</span><span lang="en">Closure</span></span><h3><span lang="es">Cierre y restauración</span><span lang="en">Closure &amp; restoration</span></h3><p><span lang="es">Diseño del cierre minero y la recuperación del terreno desde el inicio del proyecto.</span><span lang="en">Mine closure and land recovery designed from day one of the project.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PREGUNTAS FRECUENTES ====== -->
+<section class="band" id="preguntas" aria-labelledby="h-faq" style="background:var(--plataforma);padding-block:clamp(64px,8vw,104px)">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <span class="eyebrow"><span lang="es">Preguntas que nos hacen</span><span lang="en">Questions we get</span></span>
+      <h2 id="h-faq"><span lang="es">Antes de escribirnos</span><span lang="en">Before you write</span></h2>
+      <p><span lang="es">Lo que casi todos nos preguntan en el primer mensaje. Si tu duda no está aquí, pregúntanos directo.</span><span lang="en">What almost everyone asks in their first message. If your question isn't here, just ask us.</span></p>
+    </div>
+    <div class="faq">
+      <details><summary><span lang="es">¿El diagnóstico de verdad es gratis?</span><span lang="en">Is the assessment really free?</span></summary><p><span lang="es">Sí. Revisamos tu caso por WhatsApp y te decimos qué hacer primero, sin costo y sin compromiso. Si después quieres que lo hagamos nosotros, te pasamos una propuesta clara.</span><span lang="en">Yes. We review your case over WhatsApp and tell you what to do first, at no cost and with no strings attached. If you then want us to handle it, we send you a clear proposal.</span></p></details>
+      <details><summary><span lang="es">¿Qué necesito para empezar?</span><span lang="en">What do I need to get started?</span></summary><p><span lang="es">Con el número de tu título o de tu expediente nos basta para arrancar. Si tienes fotos de los últimos requerimientos o resoluciones, mejor: así te respondemos más rápido.</span><span lang="en">Your title or file number is enough to start. If you have photos of the latest agency letters or resolutions, even better: we can answer faster.</span></p></details>
+      <details><summary><span lang="es">¿Solo trabajan en el Atlántico?</span><span lang="en">Do you only work in Atlántico?</span></summary><p><span lang="es">Nuestra sede está en Barranquilla, pero atendemos casos en todo el país. Buena parte del trabajo se hace por WhatsApp y correo, y vamos a campo cuando hace falta.</span><span lang="en">We're based in Barranquilla, but we take cases nationwide. Much of the work happens over WhatsApp and email, and we go to the site when needed.</span></p></details>
+      <details><summary><span lang="es">¿Me compran material si todavía no tengo RUCOM?</span><span lang="en">Will you buy my material if I don't have RUCOM yet?</span></summary><p><span lang="es">No, porque sería ilegal para los dos. Lo que sí hacemos es acompañarte en la inscripción para que puedas vender cuanto antes.</span><span lang="en">No, because it would be illegal for both of us. What we do is help you register so you can sell as soon as possible.</span></p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA FINAL ====== -->
+<section class="final dark" id="contacto" aria-labelledby="h-cta">
+  <div class="wrap">
+    <div class="rise">
+      <span class="eyebrow"><span lang="es">Diagnóstico gratuito</span><span lang="en">Free assessment</span></span>
+      <h2 id="h-cta" style="margin-top:14px"><span lang="es">Cuéntanos de tu título. <em>Hoy</em> te respondemos.</span><span lang="en">Tell us about your title. We'll reply <em>today</em>.</span></h2>
+      <p><span lang="es">Escríbenos si necesitas ayuda con un título o una licencia minera, o si quieres comprar o vender material. Revisamos tu caso y te decimos qué hacer primero, sin costo.</span><span lang="en">Message us if you need help with a mining title or license, or want to buy or sell material. We'll review your case and tell you what to do first, free of charge.</span></p>
+      <div class="cta-row" style="margin-top:28px">
+        <a class="btn btn-verde" data-wa href="https://wa.me/573173000807" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+          <span lang="es">Escribir por WhatsApp</span><span lang="en">Message on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact rise" aria-label="Contacto" data-aria-es="Contacto" data-aria-en="Contact">
+      <div class="row"><span class="k">WhatsApp</span><span class="v" id="wa-text">+57 317 300 0807</span><button class="copy" type="button" data-copy="+57 317 300 0807"><span lang="es">Copiar número</span><span lang="en">Copy number</span></button></div>
+      <div class="row"><span class="k"><span lang="es">Correo</span><span lang="en">Email</span></span><span class="v small">antobe@imagineworldit.com.co</span><button class="copy" type="button" data-copy="antobe@imagineworldit.com.co"><span lang="es">Copiar correo</span><span lang="en">Copy email</span></button></div>
+      <div class="row"><span class="k"><span lang="es">Sede</span><span lang="en">Office</span></span><span class="v small">Barranquilla, Atlántico, Colombia</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Imagine World IT">
+      <svg viewBox="0 0 28 56" aria-hidden="true" style="height:32px"><rect x="0" y="0" width="28" height="56" fill="#6D9241"/><rect x="7.5" y="7.5" width="13" height="41" fill="none" stroke="#FFFFFF" stroke-width="2.6"/><rect x="11.2" y="11.2" width="5.6" height="33.6" fill="#4F6F2B"/></svg>
+      <span><b>Imagine World IT S.A.S.</b><small>Lo pensamos, lo hacemos</small></span>
+    </a>
+    <div class="legal">NIT 901.710.620-1 · <span lang="es">Matrícula mercantil</span><span lang="en">Commercial registry</span> 868115 · Cámara de Comercio de Barranquilla<br>
+      <span lang="es">También desarrollamos soluciones de tecnología para empresas.</span><span lang="en">We also build technology solutions for businesses.</span> · © 2026</div>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa href="https://wa.me/573173000807" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-aria-es="Escríbenos por WhatsApp" data-aria-en="Message us on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =========================================================
+   CONFIGURACIÓN — edita aquí antes de publicar
+   ========================================================= */
+const CONFIG = {
+  whatsapp: "573173000807",              // solo dígitos, con 57
+  rucom: "",                             // ej. "RUCOM-20240101234" — vacío muestra "en verificación"
+  regiones: [],                          // ej. ["Atlántico","Bolívar","Cesar"] — vacío muestra la sede
+  mensaje: {
+    es: "Hola Imagine World IT, quiero un diagnóstico gratuito de mi título/licencia minera.",
+    en: "Hello Imagine World IT, I'd like a free assessment of my mining title/license."
+  },
+  /* Multimedia: se intenta en orden (video local → imagen local → imagen Higgsfield).
+     Si nada carga, queda la animación hecha en código. */
+  media: {
+    hero:         { video: [], image: ["media/hero.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062613_26bd9126-7be1-4822-a68e-6e5aed4321ce.png"] },
+    operacion:    { video: ["media/operacion.mp4"],    image: ["media/operacion.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062656_7804edf9-c89d-405c-87f4-1ec03a305a7f.png"] },
+    trazabilidad: { video: ["media/trazabilidad.mp4"], image: ["media/trazabilidad.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062734_e105d7c0-c1d4-49d8-b7a8-5433a798777d.png"] },
+    ambiental:    { video: ["media/ambiental.mp4"],    image: ["media/ambiental.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_063055_da44c256-930f-4800-bf80-ba2c5fa0e5d1.png"] }
+  }
+};
+
+(function(){
+  const root = document.documentElement;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- idioma ---------- */
+  // el <head> ya resolvió ?lang= / localStorage y lo dejó en data-lang, antes de pintar
+  let lang = root.dataset.lang === "en" ? "en" : "es";
+  const META = {
+    es: { title: "Imagine World IT · Asesoría minero-ambiental en Colombia", desc: "Imagine World IT S.A.S. — Asesoría minero-ambiental y comercialización de minerales con trazabilidad en Colombia. Lo pensamos, lo hacemos." },
+    en: { title: "Imagine World IT · Mining & environmental advisory in Colombia", desc: "Imagine World IT S.A.S. — Mining and environmental advisory and fully traceable mineral trading in Colombia. We think it, we do it." }
+  };
+  function setLang(l, save){
+    lang = l; root.dataset.lang = l; root.lang = l;
+    document.title = META[l].title;
+    const md = document.querySelector('meta[name="description"]'); if (md) md.content = META[l].desc;
+    document.querySelectorAll("[data-set-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.setLang === l)));
+    document.querySelectorAll("[data-aria-" + l + "]").forEach(el => el.setAttribute("aria-label", el.getAttribute("data-aria-" + l)));
+    const url = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(CONFIG.mensaje[l]);
+    document.querySelectorAll("[data-wa]").forEach(a => a.href = url);
+    if (save){
+      try { localStorage.setItem("iwit-lang", l); } catch(e){}
+      // si llegó con ?lang=xx, actualizarlo para que un recargar o compartir el link respete la elección
+      try { const u = new URL(location.href); if (u.searchParams.has("lang")){ u.searchParams.set("lang", l); history.replaceState(null, "", u); } } catch(e){}
+    }
+    dispatchEvent(new CustomEvent("langchange", { detail: l }));
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.setLang, true)));
+  setLang(lang, false);
+
+  /* ---------- datos ---------- */
+  if (CONFIG.rucom){
+    document.querySelector("[data-rucom]").textContent = CONFIG.rucom;
+    const p = document.querySelector("[data-rucom-pill]");
+    p.className = "pill ok";
+    p.innerHTML = '<span lang="es">Inscrita</span><span lang="en">Registered</span>';
+  } else {
+    document.querySelector("[data-rucom]").innerHTML = '<span lang="es">Inscrita</span><span lang="en">Registered</span>';
+  }
+  if (CONFIG.regiones.length){
+    document.querySelector("[data-regiones]").textContent = CONFIG.regiones.slice(0,3).join(" · ");
+    if (CONFIG.regiones.length > 3) document.querySelector("[data-regiones-note]").textContent = "+ " + CONFIG.regiones.slice(3).join(", ");
+  }
+
+  /* ---------- copiar ---------- */
+  const toastEl = document.getElementById("toast"); let tt;
+  function toast(m){ toastEl.textContent = m; toastEl.hidden = false; clearTimeout(tt); tt = setTimeout(() => toastEl.hidden = true, 1800); }
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", () => {
+    const t = b.dataset.copy;
+    const ok = lang === "es" ? "Copiado" : "Copied", sel = lang === "es" ? "Selecciona el texto para copiarlo" : "Select the text to copy it";
+    try { navigator.clipboard.writeText(t).then(() => toast(ok), () => { selectSibling(b); toast(sel); }); }
+    catch(e){ selectSibling(b); toast(sel); }
+  }));
+  function selectSibling(b){ const v = b.parentElement.querySelector(".v"); if (!v) return; const r = document.createRange(); r.selectNodeContents(v); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  /* ---------- multimedia con respaldo ---------- */
+  function loadImage(list, i, cb){
+    if (i >= list.length) return cb(null);
+    const img = new Image(); img.decoding = "async"; img.alt = "";
+    img.onload = () => cb(img); img.onerror = () => loadImage(list, i+1, cb);
+    img.src = list[i];
+  }
+  function loadVideo(list, i, cb){
+    if (i >= list.length) return cb(null);
+    const v = document.createElement("video");
+    v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute("muted",""); v.setAttribute("playsinline",""); v.preload = "auto";
+    let done = false;
+    v.addEventListener("loadeddata", () => { if (!done){ done = true; cb(v); } }, { once:true });
+    v.addEventListener("error", () => { if (!done){ done = true; loadVideo(list, i+1, cb); } }, { once:true });
+    v.src = list[i];
+  }
+  document.querySelectorAll("[data-slot]").forEach(slot => {
+    const cfg = CONFIG.media[slot.dataset.slot]; if (!cfg) return;
+    if (slot.id === "hero-media" && window.THREE && webglOK()) return; // el hero usa el tajo 3D
+    const mount = el => { el.style.opacity = 0; el.dataset.loaded = ""; slot.appendChild(el); requestAnimationFrame(() => requestAnimationFrame(() => el.style.opacity = 1)); slot.classList.add("has-media"); };
+    loadVideo(reduce ? [] : (cfg.video||[]), 0, v => {
+      if (v){ mount(v); slot._video = v; return; }
+      loadImage(cfg.image||[], 0, img => { if (img) mount(img); });
+    });
+  });
+
+  /* ---------- escenas con scroll ---------- */
+  const scenes = [...document.querySelectorAll("[data-scene-section]")];
+  const hero = document.querySelector(".hero");
+  const clamp = (x,a,b) => Math.min(b, Math.max(a, x));
+  const ease = t => 1 - Math.pow(1 - t, 3);
+  function onScroll(){
+    const vh = innerHeight;
+    if (hero){ const r = hero.getBoundingClientRect(); hero.style.setProperty("--hp", clamp(-r.top / r.height, 0, 1).toFixed(3)); }
+    scenes.forEach(s => {
+      const r = s.getBoundingClientRect();
+      const span = Math.max(1, r.height - vh);
+      const p = clamp(-r.top / span, 0, 1);
+      const enter = clamp((vh - r.top) / vh, 0, 1);          // 0 cuando asoma, 1 cuando llena
+      const e = ease(clamp(enter * 1.05 + p * .4, 0, 1));
+      s.style.setProperty("--p", p.toFixed(3));
+      s.style.setProperty("--e", reduce ? 1 : e.toFixed(3));
+      const steps = s.querySelectorAll("[data-steps] li");
+      const idx = Math.min(steps.length - 1, Math.floor(p * steps.length * 1.02));
+      steps.forEach((li, k) => li.classList.toggle("on", reduce ? true : k === idx));
+      const v = s.querySelector("video");
+      if (v){ const vis = r.bottom > 0 && r.top < vh; if (vis && v.paused) v.play().catch(()=>{}); else if (!vis && !v.paused) v.pause(); }
+    });
+  }
+  let ticking = false;
+  addEventListener("scroll", () => { if (!ticking){ ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); } }, { passive:true });
+  addEventListener("resize", onScroll);
+  onScroll();
+
+  /* ---------- reveal suave (solo lo que aún no se ve) ---------- */
+  if (!reduce && "IntersectionObserver" in window){
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting){ en.target.classList.remove("below"); io.unobserve(en.target); } }), { rootMargin:"0px 0px -8% 0px" });
+    document.querySelectorAll(".rise").forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("below"); io.observe(el); } });
+  }
+
+  /* ---------- visuales en código (respaldo y base) ---------- */
+  const C = { carbon:"#1B1C1A", verde:"109,146,65", verdeLt:"156,194,107", cobre:"181,103,46", cobreLt:"217,145,90", roca:"243,244,241" };
+  function seeded(n){ let s = n; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+
+  function Scene(canvas){
+    const ctx = canvas.getContext("2d");
+    const kind = canvas.dataset.scene;
+    let w = 0, h = 0, dpr = 1, t0 = performance.now(), running = false, raf = 0;
+    const rnd = seeded(kind.length * 977 + 13);
+    const harm = Array.from({length:5}, (_,i) => ({ a: rnd()*0.08 + .02, f: i+2, ph: rnd()*Math.PI*2 }));
+    function size(){
+      const r = canvas.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
+      w = Math.max(1, r.width); h = Math.max(1, r.height);
+      canvas.width = Math.round(w*dpr); canvas.height = Math.round(h*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    function ring(cx, cy, R, sq, rot, t){
+      ctx.beginPath();
+      for (let k = 0; k <= 96; k++){
+        const a = k/96 * Math.PI*2;
+        let m = 1; harm.forEach(hh => m += hh.a * Math.sin(hh.f*a + hh.ph + t*.05));
+        const x = Math.cos(a+rot) * R * m, y = Math.sin(a+rot) * R * m * sq;
+        k ? ctx.lineTo(cx+x, cy+y) : ctx.moveTo(cx+x, cy+y);
+      }
+      ctx.closePath();
+    }
+    function bg(){ ctx.fillStyle = C.carbon; ctx.fillRect(0,0,w,h); }
+    function grid(alpha){
+      ctx.strokeStyle = `rgba(${C.roca},${alpha})`; ctx.lineWidth = 1;
+      const s = 64; ctx.beginPath();
+      for (let x = (w % s)/2; x < w; x += s){ ctx.moveTo(x,0); ctx.lineTo(x,h); }
+      for (let y = (h % s)/2; y < h; y += s){ ctx.moveTo(0,y); ctx.lineTo(w,y); }
+      ctx.stroke();
+    }
+    function pit(t, cx, cy, maxR, n){
+      for (let i = n; i >= 1; i--){
+        const R = maxR * i / n;
+        ring(cx, cy, R, .62, t*.01, t);
+        const g = i / n;
+        ctx.fillStyle = `rgba(${i%3===0 ? C.cobre : C.verde},${.025 + (1-g)*.05})`; ctx.fill();
+        ctx.strokeStyle = i % 4 === 0 ? `rgba(${C.cobreLt},${.55 - g*.25})` : `rgba(${C.verdeLt},${.42 - g*.22})`;
+        ctx.lineWidth = i % 4 === 0 ? 1.4 : .9; ctx.stroke();
+      }
+      // camiones subiendo la rampa en espiral
+      for (let k = 0; k < 4; k++){
+        const u = ((t*.018 + k/4) % 1);
+        const R = maxR * (.12 + u*.86), a = u * Math.PI * 5 + t*.01;
+        const x = cx + Math.cos(a) * R, y = cy + Math.sin(a) * R * .62;
+        ctx.fillStyle = `rgba(${C.cobreLt},.95)`; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, Math.PI*2); ctx.fill();
+      }
+    }
+    function cross(x,y,label){
+      ctx.strokeStyle = `rgba(${C.roca},.5)`; ctx.lineWidth = 1; ctx.beginPath();
+      ctx.moveTo(x-7,y); ctx.lineTo(x+7,y); ctx.moveTo(x,y-7); ctx.lineTo(x,y+7); ctx.stroke();
+      ctx.fillStyle = `rgba(${C.roca},.55)`; ctx.font = "11px 'JetBrains Mono', monospace"; ctx.fillText(label, x+10, y-8);
+    }
+    function draw(now){
+      const t = (now - t0) / 1000;
+      bg();
+      if (kind === "hero"){
+        grid(.035);
+        pit(t, w*.72, h*.48, Math.max(w,h)*.42, 18);
+        cross(w*.72, h*.48, "EL. 42 m");
+        cross(w*.88, h*.2, "BM-01");
+      } else if (kind === "pit"){
+        grid(.04);
+        pit(t, w*.55, h*(w<700?.28:.42), Math.max(w,h)*(w<700?.4:.55), 22);
+        cross(w*.2, h*.2, "PTO · FRENTE 2");
+      } else if (kind === "route"){
+        grid(.05);
+        const narrow = w < 700;
+        const pts = narrow ? [[.12,.36],[.34,.16],[.56,.32],[.74,.12],[.88,.28]] : [[.1,.62],[.3,.38],[.5,.55],[.7,.3],[.9,.46]];
+        const labels = lang === "es" ? ["MINA","LABORATORIO","ACOPIO","DESPACHO","COMPRADOR"] : ["MINE","LAB","STOCKPILE","SHIPMENT","BUYER"];
+        ctx.lineWidth = 1.5; ctx.strokeStyle = `rgba(${C.verdeLt},.55)`; ctx.setLineDash([6,6]); ctx.lineDashOffset = -t*18;
+        ctx.beginPath(); pts.forEach(([x,y],i) => i ? ctx.lineTo(x*w,y*h) : ctx.moveTo(x*w,y*h)); ctx.stroke(); ctx.setLineDash([]);
+        const u = (t*.12) % 1, seg = u * (pts.length-1), si = Math.floor(seg), f = seg - si;
+        const a = pts[si], b = pts[Math.min(si+1, pts.length-1)];
+        const px = (a[0] + (b[0]-a[0])*f) * w, py = (a[1] + (b[1]-a[1])*f) * h;
+        ctx.fillStyle = `rgba(${C.cobreLt},.25)`; ctx.beginPath(); ctx.arc(px,py,16,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle = `rgba(${C.cobreLt},1)`; ctx.beginPath(); ctx.arc(px,py,5,0,Math.PI*2); ctx.fill();
+        pts.forEach(([x,y],i) => {
+          const on = i <= si;
+          ctx.fillStyle = C.carbon; ctx.strokeStyle = on ? `rgba(${C.verdeLt},1)` : `rgba(${C.roca},.45)`; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.rect(x*w-7, y*h-7, 14, 14); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = on ? `rgba(${C.roca},.9)` : `rgba(${C.roca},.5)`; ctx.font = (narrow ? "600 10px" : "600 12px") + " 'JetBrains Mono', monospace";
+          ctx.textAlign = i === pts.length-1 ? "right" : (i === 0 ? "left" : "center");
+          ctx.fillText(labels[i], x*w + (i === pts.length-1 ? 7 : i === 0 ? -7 : 0), y*h - 18); ctx.textAlign = "left";
+        });
+      } else if (kind === "water"){
+        for (let L = 0; L < 26; L++){
+          const y0 = h * (.08 + L/26 * .9);
+          ctx.beginPath();
+          for (let x = 0; x <= w; x += 8){
+            const y = y0 + Math.sin(x*.006 + t*.5 + L*.4) * 14 + Math.sin(x*.017 - t*.3 + L) * 6;
+            x ? ctx.lineTo(x,y) : ctx.moveTo(x,y);
+          }
+          ctx.strokeStyle = L % 6 === 3 ? `rgba(${C.cobreLt},.35)` : `rgba(${C.verdeLt},${.12 + (L/26)*.32})`;
+          ctx.lineWidth = L % 6 === 3 ? 1.4 : 1; ctx.stroke();
+        }
+      }
+    }
+    const covered = () => canvas.parentElement.classList.contains("has-media") || canvas.parentElement.classList.contains("gl-on");
+    // si la foto/video carga mientras la animación corre, se detiene: nadie la ve debajo
+    function loop(now){ if (covered()){ running = false; return; } draw(now); if (running) raf = requestAnimationFrame(loop); }
+    size(); draw(performance.now());
+    addEventListener("resize", () => { size(); draw(performance.now()); });
+    addEventListener("langchange", () => { if (!running && !covered()) draw(performance.now()); }); // etiquetas MINA/MINE
+    const io = new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting && !reduce && !covered()){ if (!running){ running = true; raf = requestAnimationFrame(loop); } }
+      else { running = false; cancelAnimationFrame(raf); }
+    }));
+    io.observe(canvas);
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => document.querySelectorAll("canvas[data-scene]").forEach(Scene));
+  else document.querySelectorAll("canvas[data-scene]").forEach(Scene);
+
+  /* =========================================================
+     3D (Three.js): tajo minero en el hero + minerales
+     ========================================================= */
+  function webglOK(){ try { const c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); } catch(e){ return false; } }
+  if (window.THREE && webglOK()) { try { initHero3D(); } catch(e){ console.warn("hero3d", e); } try { initGems(); } catch(e){ console.warn("gems", e); } }
+
+  function terrainH(x, z){
+    // relieve general suave
+    let n = 3.2*Math.sin(x*.045+1.3)*Math.cos(z*.038) + 1.6*Math.sin(x*.11+z*.07) + .7*Math.sin(x*.23 - z*.19) + .35*Math.sin(x*.5+z*.43);
+    // tajo con bancos escalonados (centro desplazado a la derecha)
+    const dx = x - 26, dz = (z + 4) * 1.25;
+    const r = Math.sqrt(dx*dx + dz*dz), R = 54;
+    if (r < R){
+      const t = 1 - r/R;
+      const depth = 30 * Math.pow(t, .75);
+      const bench = 3.4, d = depth / bench, f = d - Math.floor(d);
+      const stepped = (Math.floor(d) + smooth(.72, 1, f)) * bench;
+      n = n * (r/R) - stepped;
+    }
+    return n;
+  }
+  function smooth(a,b,x){ const t = Math.min(1, Math.max(0, (x-a)/(b-a))); return t*t*(3-2*t); }
+
+  function initHero3D(){
+    const canvas = document.getElementById("hero-gl"), media = document.getElementById("hero-media"), hero = document.querySelector(".hero");
+    const small = innerWidth < 760;
+    // "default" en vez de "high-performance": en portátiles no despierta la GPU dedicada solo por el hero
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: !small, alpha: false, powerPreference: "default" });
+    renderer.setPixelRatio(Math.min(small ? 1.25 : 1.5, devicePixelRatio || 1));
+    renderer.setClearColor(0x1B1C1A, 1);
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x1B1C1A, 70, 230);
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.5, 600);
+
+    // ---- terreno
+    const SEG = small ? 96 : 160, SIZE = 260;
+    const geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG);
+    geo.rotateX(-Math.PI/2);
+    const pos = geo.attributes.position;
+    for (let i = 0; i < pos.count; i++) pos.setY(i, terrainH(pos.getX(i), pos.getZ(i)));
+    geo.computeVertexNormals();
+    const mat = new THREE.ShaderMaterial({
+      extensions: { derivatives: true },
+      uniforms: { uTime:{value:0}, uReveal:{value:0}, uFogColor:{value:new THREE.Color(0x1B1C1A)}, uFogNear:{value:70}, uFogFar:{value:230},
+        uCursor:{value:new THREE.Vector3(26,0,-4)}, uCursorOn:{value:0}, uPulse:{value:new THREE.Vector3()}, uPulseT:{value:99} },
+      vertexShader: `
+        varying float vH; varying vec3 vW; varying vec3 vN; varying float vDepth;
+        void main(){
+          vec4 w = modelMatrix * vec4(position,1.0);
+          vW = w.xyz; vH = position.y; vN = normalize(normal);
+          vec4 mv = viewMatrix * w; vDepth = -mv.z;
+          gl_Position = projectionMatrix * mv;
+        }`,
+      fragmentShader: `
+        uniform float uTime; uniform float uReveal; uniform vec3 uFogColor; uniform float uFogNear; uniform float uFogFar;
+        uniform vec3 uCursor; uniform float uCursorOn; uniform vec3 uPulse; uniform float uPulseT;
+        varying float vH; varying vec3 vW; varying vec3 vN; varying float vDepth;
+        float line(float v, float w){ float g = abs(fract(v - .5) - .5) / fwidth(v); return 1.0 - min(g / w, 1.0); }
+        // ojo: smoothstep con edge0 > edge1 es indefinido en GLSL; para invertir se usa 1.0 - smoothstep(...)
+        void main(){
+          vec3 carbon = vec3(.105,.11,.10);
+          vec3 olive  = vec3(.20,.27,.13);
+          vec3 earth  = vec3(.36,.22,.12);
+          vec3 green  = vec3(.61,.76,.42);
+          vec3 copper = vec3(.85,.57,.35);
+          float diff = clamp(dot(normalize(vN), normalize(vec3(-.5,.9,.35))), 0.0, 1.0);
+          float pit = 1.0 - smoothstep(-9.0, -1.0, vH);
+          vec3 base = mix(mix(carbon, olive, .55), earth, pit) * (.45 + .85*diff);
+          // curvas de nivel cada 1.7 m, maestras cada 8.5 m
+          float c  = line(vH / 1.7, 1.0);
+          float cm = line(vH / 8.5, 1.4);
+          vec3 lc = mix(green, copper, pit);
+          base += lc * c * .38 + copper * cm * .55;
+          // barrido de escaneo topográfico
+          float scan = 1.0 - smoothstep(0.0, 1.2, abs(vW.x - (mod(uTime*18.0, 320.0) - 160.0)));
+          base += green * scan * .35;
+          // cursor de topógrafo: las curvas se encienden alrededor y un anillo marca el punto
+          float dC = length(vW.xz - uCursor.xz);
+          float nearC = (1.0 - smoothstep(4.0, 22.0, dC)) * uCursorOn;
+          base += lc * c * nearC * 1.1 + copper * cm * nearC * .6;
+          float ringC = (1.0 - smoothstep(0.0, .7, abs(dC - 4.5))) * uCursorOn;
+          base = mix(base, copper * 1.25, ringC * .9);
+          // onda al hacer clic / tocar
+          float dP = length(vW.xz - uPulse.xz), pr = uPulseT * 46.0;
+          float wave = (1.0 - smoothstep(0.0, 1.6, abs(dP - pr))) * max(0.0, 1.0 - uPulseT / 1.8);
+          base += green * wave * 1.2 + lc * c * wave * 1.5;
+          // revelado inicial desde el centro del tajo
+          float r = length(vW.xz - vec2(26.0,-4.0));
+          float rev = 1.0 - smoothstep(uReveal*230.0 - 30.0, uReveal*230.0, r);
+          base *= rev;
+          float fog = smoothstep(uFogNear, uFogFar, vDepth);
+          gl_FragColor = vec4(mix(base, uFogColor, fog), 1.0);
+        }`
+    });
+    scene.add(new THREE.Mesh(geo, mat));
+
+    // ---- volquetas subiendo por la rampa en espiral
+    const trucks = [], truckGeo = new THREE.BoxGeometry(1.6, 1.1, 2.6), truckMat = new THREE.MeshBasicMaterial({ color: 0xE3A066 });
+    const glowTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"); const gr = g.createRadialGradient(32,32,0,32,32,32); gr.addColorStop(0,"rgba(255,200,140,1)"); gr.addColorStop(1,"rgba(255,200,140,0)"); g.fillStyle = gr; g.fillRect(0,0,64,64); return new THREE.CanvasTexture(c); })();
+    for (let k = 0; k < 5; k++){
+      const m = new THREE.Mesh(truckGeo, truckMat);
+      const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xffffff, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+      glow.scale.set(4,4,1); m.add(glow);
+      scene.add(m); trucks.push({ m, off: k/5 });
+    }
+    // ---- polvo / partículas
+    const N = small ? 350 : 700, pg = new THREE.BufferGeometry(), pp = new Float32Array(N*3), pc = new Float32Array(N*3);
+    const cA = new THREE.Color(0x9CC26B), cB = new THREE.Color(0xD9915A);
+    for (let i = 0; i < N; i++){
+      pp[i*3] = (Math.random()-.5)*220; pp[i*3+1] = Math.random()*40 - 8; pp[i*3+2] = (Math.random()-.5)*220;
+      const cc = Math.random() < .35 ? cB : cA; pc[i*3] = cc.r; pc[i*3+1] = cc.g; pc[i*3+2] = cc.b;
+    }
+    pg.setAttribute("position", new THREE.BufferAttribute(pp,3)); pg.setAttribute("color", new THREE.BufferAttribute(pc,3));
+    const dust = new THREE.Points(pg, new THREE.PointsMaterial({ size: small ? .7 : .55, vertexColors: true, transparent: true, opacity: .7, depthWrite: false, blending: THREE.AdditiveBlending, map: glowTex }));
+    scene.add(dust);
+    // ---- marcadores topográficos (hitos)
+    const markMat = new THREE.LineBasicMaterial({ color: 0xF3F4F1, transparent: true, opacity: .55 });
+    [[26,-4],[70,-46],[-20,30]].forEach(([x,z]) => {
+      const y = terrainH(x,z), g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x,y,z), new THREE.Vector3(x,y+9,z)]);
+      scene.add(new THREE.Line(g, markMat));
+      const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0x9CC26B, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+      s.position.set(x, y+9, z); s.scale.set(3,3,1); scene.add(s);
+    });
+
+    // ---- jalón (estaca de topografía) que acompaña al cursor
+    const stake = new THREE.Group();
+    stake.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,7,0)]), new THREE.LineBasicMaterial({ color: 0xD9915A, transparent: true, opacity: .9 })));
+    const stakeTop = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: 0xD9915A, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+    stakeTop.position.y = 7; stakeTop.scale.set(3.4,3.4,1); stake.add(stakeTop);
+    stake.visible = false; scene.add(stake);
+
+    // ---- interacción: el mouse (o el dedo) mide el terreno; clic / toque lanza una onda
+    const mouse = { x:0, y:0, tx:0, ty:0 };            // para el paralaje de cámara
+    const ptr = { x:0, y:0, active:false, last:-1e9 };  // posición sobre el canvas (px)
+    const survey = document.getElementById("survey"), hint = document.getElementById("hero-hint");
+    if (hint) hint.hidden = false;
+    const ndc = new THREE.Vector2(), ray = new THREE.Raycaster(), hit = new THREE.Vector3(), cursorS = new THREE.Vector3(26, terrainH(26,-4), -4);
+    let pulseStart = -1e9, pulseArmed = false, hovering = false;
+    const interactive = el => el.closest("a,button,input,select,textarea,summary,.lang");
+    function setPtr(e){ const r = media.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; ptr.active = true; ptr.last = performance.now(); }
+    addEventListener("pointermove", e => { mouse.tx = (e.clientX/innerWidth - .5); mouse.ty = (e.clientY/innerHeight - .5); }, { passive:true });
+    hero.addEventListener("pointermove", e => { if (e.pointerType === "mouse") { setPtr(e); hovering = !interactive(e.target); } }, { passive:true });
+    hero.addEventListener("pointerleave", () => { hovering = false; });
+    // "click" y no "pointerdown": en celular no se dispara cuando el dedo solo está haciendo scroll
+    hero.addEventListener("click", e => {
+      if (interactive(e.target)) return;
+      setPtr(e); hovering = true;
+      pulseStart = performance.now(); pulseArmed = true;
+      if (hint) hint.style.opacity = .45;
+    });
+    // marcha a lo largo del rayo hasta tocar el relieve (barato: ~120 evaluaciones por cuadro, sin mallas extra)
+    function pick(px, py){
+      const r = media.getBoundingClientRect();
+      ndc.set(px / r.width * 2 - 1, -(py / r.height) * 2 + 1);
+      ray.setFromCamera(ndc, camera);
+      const o = ray.ray.origin, d = ray.ray.direction;
+      let prev = 0;
+      for (let s = 2; s < 360; s += 3){
+        const x = o.x + d.x*s, y = o.y + d.y*s, z = o.z + d.z*s;
+        if (Math.abs(x) > 130 || Math.abs(z) > 130) { if (s > 60) return false; prev = s; continue; }
+        if (y <= terrainH(x, z)){
+          let a = prev, b = s;                       // refinar por bisección
+          for (let k = 0; k < 6; k++){ const m = (a+b)/2; (o.y + d.y*m <= terrainH(o.x + d.x*m, o.z + d.z*m)) ? b = m : a = m; }
+          hit.set(o.x + d.x*b, 0, o.z + d.z*b); hit.y = terrainH(hit.x, hit.z);
+          return true;
+        }
+        prev = s;
+      }
+      return false;
+    }
+    const fmt = (n, d) => n.toLocaleString(lang === "es" ? "es-CO" : "en-US", { minimumFractionDigits:d, maximumFractionDigits:d });
+    const proj = new THREE.Vector3();
+
+    // ---- cámara guiada por scroll + mouse
+    function size(){
+      const r = media.getBoundingClientRect(); const w = Math.max(1, r.width), h = Math.max(1, r.height);
+      renderer.setSize(w, h, false); camera.aspect = w/h;
+      camera.fov = w/h < .8 ? 58 : 42; camera.updateProjectionMatrix();
+    }
+    size(); addEventListener("resize", size);
+    const look = new THREE.Vector3(), camPos = new THREE.Vector3();
+    let running = false, raf = 0, start = performance.now(), hp = 0, hpS = 0, orbitV = 0, kickUntil = 0;
+    function frame(now){
+      // con movimiento reducido el reloj queda quieto: nada se mueve solo, solo responde al usuario
+      const t = reduce ? 6 : (now - start)/1000;
+      const r = hero.getBoundingClientRect(); hp = reduce ? 0 : Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)));
+      hpS += (hp - hpS) * .08;
+      mouse.x += (mouse.tx - mouse.x) * .05; mouse.y += (mouse.ty - mouse.y) * .05;
+      const narrow = camera.aspect < .9;
+      // sobrevuelo: de una vista amplia a sumergirse en el tajo; la órbita se nota (una vuelta completa ≈ 1,5 min)
+      orbitV += (.07 - orbitV) * .02;
+      const orbit = reduce ? .3 : t * orbitV + hpS * 1.4;
+      const radius = (narrow ? 120 : 105) - hpS * 60;
+      const height = (narrow ? 70 : 58) - hpS * 38;
+      const cx = narrow ? 26 : 8;
+      camPos.set(cx + Math.sin(orbit) * radius * .55 - 40 + mouse.x * 22, height - mouse.y * 12, Math.cos(orbit) * radius);
+      camera.position.copy(camPos);
+      look.set(narrow ? 26 : 6 + hpS * 14, -10 - hpS * 10, -4);
+      camera.lookAt(look);
+      camera.updateMatrixWorld();
+      mat.uniforms.uTime.value = t;
+      mat.uniforms.uReveal.value = reduce ? 1 : Math.min(1, .25 + t / 1.6);
+      let lead = null;
+      trucks.forEach((tr, k) => {
+        const u = ((t * .02 + tr.off) % 1);
+        const R = 54 * (.12 + u * .85), a = u * Math.PI * 6;
+        const x = 26 + Math.cos(a) * R, z = -4 + Math.sin(a) * R / 1.25;
+        tr.m.position.set(x, terrainH(x, z) + .7, z);
+        tr.m.rotation.y = -a;
+        if (k === 0) lead = tr.m.position;
+      });
+      // ¿dónde apunta el cursor? si nadie lo mueve hace rato, la estaca sigue a la primera volqueta
+      const idle = !hovering || now - ptr.last > 4000;
+      let on = false, label = "";
+      if (!idle && pick(ptr.x, ptr.y)){ on = true; }
+      else if (idle && lead){ hit.copy(lead); hit.y = terrainH(hit.x, hit.z); on = true; label = lang === "es" ? "volqueta" : "haul truck"; }
+      if (on){
+        cursorS.lerp(hit, idle ? .12 : .35);
+        mat.uniforms.uCursor.value.copy(cursorS);
+        stake.position.set(cursorS.x, terrainH(cursorS.x, cursorS.z), cursorS.z);
+        if (pulseArmed){ mat.uniforms.uPulse.value.copy(hit); pulseArmed = false; }
+      }
+      mat.uniforms.uCursorOn.value += ((on ? 1 : 0) - mat.uniforms.uCursorOn.value) * .1;
+      mat.uniforms.uPulseT.value = (now - pulseStart) / 1000;
+      stake.visible = on;
+      stakeTop.scale.setScalar(3.4 + Math.sin(t*3) * .5);
+      // etiqueta HTML pegada a la punta de la estaca
+      if (survey){
+        // en celular/tablet el texto tapa el terreno: ahí la etiqueta solo sale cuando la persona toca, no en reposo
+        if (on && hpS < .85 && !(idle && media.clientWidth < 1100)){
+          proj.set(stake.position.x, stake.position.y + 7, stake.position.z).project(camera);
+          const mr = media.getBoundingClientRect();
+          const sw = survey.offsetWidth || 200;
+          const sx = Math.min(mr.width - sw - 20, Math.max(8, (proj.x * .5 + .5) * mr.width)), sy = Math.max(8, (-proj.y * .5 + .5) * mr.height);
+          const depth = Math.max(0, -cursorS.y);
+          survey.innerHTML = (label ? label + " · " : "") + (lang === "es" ? "cota " : "elev. ") + "<b>" + (cursorS.y < 0 ? "−" : "") + fmt(Math.abs(cursorS.y), 1) + " m</b>" +
+            (depth > 2 ? " · " + (lang === "es" ? "banco " : "bench ") + Math.ceil(depth / 3.4) : "");
+          survey.style.transform = `translate(${Math.round(sx + 12)}px, ${Math.round(sy - 34)}px)`;
+          survey.classList.add("on");
+        } else survey.classList.remove("on");
+      }
+      if (!reduce){
+        const pa = dust.geometry.attributes.position.array;
+        for (let i = 0; i < pa.length; i += 3){ pa[i+1] += .015 + Math.sin(t + i) * .004; pa[i] += .01; if (pa[i+1] > 34) pa[i+1] = -8; if (pa[i] > 110) pa[i] = -110; }
+        dust.geometry.attributes.position.needsUpdate = true;
+      }
+      renderer.render(scene, camera);
+      if (reduce && now > kickUntil) running = false;
+      if (running) raf = requestAnimationFrame(frame);
+    }
+    media.classList.add("gl-on");
+    if (reduce){
+      // "movimiento reducido" (p. ej. Windows con Efectos de animación apagados): sin sobrevuelo, sin polvo, sin
+      // camiones andando. Pero si la persona mueve el mouse o toca, el terreno responde unos instantes.
+      const kick = ms => { kickUntil = Math.max(kickUntil, performance.now() + ms); if (!running){ running = true; raf = requestAnimationFrame(frame); } };
+      hero.addEventListener("pointermove", () => kick(700), { passive:true });
+      hero.addEventListener("pointerleave", () => kick(1200));
+      hero.addEventListener("click", () => kick(1900));
+      addEventListener("resize", () => kick(100));
+      kick(100);
+      return;
+    }
+    new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting){ if (!running){ running = true; raf = requestAnimationFrame(frame); } }
+      else { running = false; cancelAnimationFrame(raf); }
+    })).observe(canvas);
+  }
+
+  function initGems(){
+    document.querySelectorAll("canvas[data-gem]").forEach(canvas => {
+      const kind = canvas.dataset.gem;
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
+      renderer.setClearColor(0x000000, 0);
+      const scene = new THREE.Scene();
+      const cam = new THREE.PerspectiveCamera(35, 1, .1, 100); cam.position.set(0, .4, 7.8); cam.lookAt(0,0,0);
+      // luces de estudio: llave blanca, relleno verde marca, contraluz cobre
+      scene.add(new THREE.AmbientLight(0xffffff, .38));
+      const key = new THREE.DirectionalLight(0xffffff, 1.15); key.position.set(3,5,4); scene.add(key);
+      const fill = new THREE.PointLight(0x9CC26B, 1.2, 25); fill.position.set(-5,1,3); scene.add(fill);
+      const rim = new THREE.PointLight(0xFFB070, 1.6, 25); rim.position.set(2,-1,-5); scene.add(rim);
+      const top = new THREE.DirectionalLight(0xfff4e0, .5); top.position.set(-2,6,-1); scene.add(top);
+      const group = new THREE.Group(); scene.add(group);
+      const rnd = seeded(kind === "metales" ? 7 : 41);
+      if (kind === "metales"){
+        // cristales de cobre nativo
+        const cu = new THREE.MeshPhongMaterial({ color: 0x9A4F24, specular: 0xFFC79E, shininess: 90, flatShading: true });
+        for (let i = 0; i < 6; i++){
+          const g = new THREE.OctahedronGeometry(.55 + rnd()*.35, 0); g.scale(1, 1.9 + rnd()*.8, 1);
+          const m = new THREE.Mesh(g, cu);
+          m.position.set(-.55 + (rnd()-.5)*.9, (rnd()-.5)*.5, (rnd()-.5)*.9);
+          m.rotation.set((rnd()-.5)*1.1, rnd()*3, (rnd()-.5)*1.1);
+          group.add(m);
+        }
+        // pepita de oro
+        const ng = new THREE.IcosahedronGeometry(.85, 4), np = ng.attributes.position, v = new THREE.Vector3();
+        for (let i = 0; i < np.count; i++){ v.fromBufferAttribute(np, i); const k = 1 + .18*Math.sin(v.x*4.1+1) * Math.cos(v.y*3.7) + .1*Math.sin(v.z*7.3 + v.x*2); v.multiplyScalar(k); v.y *= .75; np.setXYZ(i, v.x, v.y, v.z); }
+        ng.computeVertexNormals();
+        const nug = new THREE.Mesh(ng, new THREE.MeshPhongMaterial({ color: 0xB08420, specular: 0xFFF1B8, shininess: 120 }));
+        nug.position.set(1.05, -.35, .4); group.add(nug);
+      } else {
+        // pila de agregados: piedra, grava y arena
+        const tones = [0x8A8378, 0xB9AE98, 0x6F6A60, 0xA4703F, 0xD9D2C3];
+        for (let i = 0; i < 26; i++){
+          const g = new THREE.DodecahedronGeometry(.18 + rnd()*.42, 0); g.scale(1, .65 + rnd()*.4, 1 + rnd()*.3);
+          const m = new THREE.Mesh(g, new THREE.MeshPhongMaterial({ color: tones[Math.floor(rnd()*tones.length)], shininess: 6, specular: 0x222222, flatShading: true }));
+          const a = rnd()*Math.PI*2, rr = Math.sqrt(rnd())*1.6;
+          m.position.set(Math.cos(a)*rr, -.7 + (1.6 - rr)*.75 + rnd()*.25, Math.sin(a)*rr*.8);
+          m.rotation.set(rnd()*3, rnd()*3, rnd()*3);
+          group.add(m);
+        }
+      }
+      function size(){ const r = canvas.getBoundingClientRect(); renderer.setSize(Math.max(1,r.width), Math.max(1,r.height), false); cam.aspect = r.width/Math.max(1,r.height); cam.updateProjectionMatrix(); }
+      size(); addEventListener("resize", size);
+      let running = false, raf = 0, s0 = performance.now();
+      // arrastrar para girar, con inercia; el giro automático vuelve solo
+      const spin = { y:0, x:0, vy:0, vx:0, drag:false, px:0, py:0 };
+      const gem = canvas.parentElement, tip = gem.querySelector(".drag");
+      if (tip) tip.hidden = false;
+      canvas.addEventListener("pointerdown", e => { spin.drag = true; spin.px = e.clientX; spin.py = e.clientY; spin.vy = spin.vx = 0; gem.classList.add("touched"); try { canvas.setPointerCapture(e.pointerId); } catch(_){} });
+      canvas.addEventListener("pointermove", e => {
+        if (!spin.drag) return;
+        const dx = e.clientX - spin.px, dy = e.clientY - spin.py; spin.px = e.clientX; spin.py = e.clientY;
+        spin.vy = dx * .012; spin.vx = dy * .008; spin.y += spin.vy; spin.x = Math.max(-.8, Math.min(.8, spin.x + spin.vx));
+        if (reduce) frame(performance.now());
+      });
+      const end = () => { spin.drag = false; };
+      canvas.addEventListener("pointerup", end); canvas.addEventListener("pointercancel", end);
+      function frame(now){
+        const t = reduce ? 0 : (now - s0)/1000;
+        if (!spin.drag){ spin.y += spin.vy; spin.vy *= .94; spin.x *= .96; }
+        const r = canvas.getBoundingClientRect(); const sp = (r.top + r.height/2) / innerHeight; // 1 abajo → 0 arriba
+        group.rotation.y = (reduce ? 0 : t * .35) + sp * 2.2 + spin.y;
+        group.rotation.x = Math.sin(t*.5) * .12 - .15 + spin.x;
+        group.position.set(kind === "metales" ? -.25 : 0, Math.sin(t*1.1) * .06, 0);
+        renderer.render(scene, cam);
+        if (running) raf = requestAnimationFrame(frame);
+      }
+      frame(performance.now());
+      if (reduce) return;
+      new IntersectionObserver(es => es.forEach(en => {
+        if (en.isIntersecting){ if (!running){ running = true; raf = requestAnimationFrame(frame); } }
+        else { running = false; cancelAnimationFrame(raf); }
+      })).observe(canvas);
+    });
+  }
+
+  /* inclinación 3D de las tarjetas de minerales con el mouse */
+  if (!reduce && matchMedia("(hover:hover)").matches){
+    document.querySelectorAll(".mineral").forEach(card => {
+      card.addEventListener("pointermove", e => { const r = card.getBoundingClientRect(); const x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5; card.style.transform = `perspective(900px) rotateY(${x*7}deg) rotateX(${-y*7}deg) translateY(-4px)`; });
+      card.addEventListener("pointerleave", () => card.style.transform = "");
+    });
+  }
+})();
+</script>
+</body>
+</html>
