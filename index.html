@@ -52,6 +52,8 @@
   --verde-lt:#9CC26B;  /* verde para texto sobre oscuro */
   --cobre:#B5672E;     /* acento comercial */
   --cobre-lt:#D9915A;  /* cobre sobre oscuro */
+  --cobre-ink:#A35C28; /* cobre para texto pequeño sobre claro (contraste 5:1) */
+  --verde-btn:#5A7A35; /* fondo de botón con texto blanco (contraste 4,9:1) */
   --arena:#D9D2C3;
   --linea:#E3DDD0;
   --muted:#5F625B;
@@ -102,7 +104,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .lang button:focus-visible{outline:2px solid var(--verde);outline-offset:-2px}
 .btn{display:inline-flex;align-items:center;gap:10px;max-width:100%;font-family:var(--body);font-weight:700;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border-radius:999px;border:1.5px solid transparent;transition:transform .2s ease,background .2s ease;cursor:pointer;line-height:1.1}
 .btn svg{width:18px;height:18px;flex:none}
-.btn-verde{background:var(--verde);color:#fff}
+.btn-verde{background:var(--verde-btn);color:#fff}
 .btn-verde:hover{background:var(--verde-ink);transform:translateY(-1px)}
 .btn-ghost{border-color:currentColor;color:var(--roca)}
 .btn-ghost:hover{background:rgba(243,244,241,.1)}
@@ -159,7 +161,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;width:fit-content}
 .pill.ok{background:#E6EEDB;color:var(--verde-ink)}
 .pill.ok::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--verde)}
-.pill.wait{border:1px dashed var(--cobre);color:var(--cobre)}
+.pill.wait{border:1px dashed var(--cobre-ink);color:var(--cobre-ink)}
 
 /* ---------- sections ---------- */
 section.band{padding-block:clamp(72px,10vw,128px)}
