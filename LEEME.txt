@@ -24,8 +24,9 @@ ARCHIVOS
 
 3. EDITAR DATOS (al inicio del <script> en index.html, objeto CONFIG)
    whatsapp ... 573173000807
-   rucom ...... vacío = muestra "Inscrita · número en verificación". Pon el número cuando lo tengan.
-   regiones ... vacío = muestra "Atlántico · sede en Barranquilla". Ej: ["Atlántico","Bolívar","Cesar"]
+   rucom ...... vacío = muestra "—" y "En renovación" (el RUCOM no está vigente). Pon el número solo cuando
+                la renovación esté aprobada; entonces muestra "Vigente".
+   regiones ... vacío = muestra "Todo Colombia · sede en Barranquilla · atención en todo el país". Ej: ["Atlántico","Bolívar","Cesar"]
    mensaje .... texto que llega prellenado al WhatsApp, en ES y EN
 
 4. PUBLICAR

@@ -430,7 +430,7 @@ footer a{color:var(--verde-lt)}
       <div class="fact">
         <span class="k">RUCOM</span>
         <span class="v" data-rucom>—</span>
-        <span class="pill wait" data-rucom-pill><span lang="es">Número en verificación</span><span lang="en">Number being verified</span></span>
+        <span class="pill wait" data-rucom-pill><span lang="es">En renovación</span><span lang="en">Renewal in progress</span></span>
       </div>
       <div class="fact">
         <span class="k"><span lang="es">Cámara de Comercio</span><span lang="en">Chamber of Commerce</span></span>
@@ -439,7 +439,7 @@ footer a{color:var(--verde-lt)}
       </div>
       <div class="fact">
         <span class="k"><span lang="es">Regiones de operación</span><span lang="en">Operating regions</span></span>
-        <span class="v" data-regiones>Atlántico</span>
+        <span class="v" data-regiones><span lang="es">Todo Colombia</span><span lang="en">All of Colombia</span></span>
         <span class="s" data-regiones-note><span lang="es">Sede en Barranquilla · atención en todo el país</span><span lang="en">Based in Barranquilla · nationwide service</span></span>
       </div>
     </div>
@@ -458,7 +458,7 @@ footer a{color:var(--verde-lt)}
     </article>
     <ol class="promesas">
       <li class="rise"><span class="n">1</span><h3><span lang="es">Te hablamos claro</span><span lang="en">We speak plainly</span></h3><p><span lang="es">Sin jerga de ventanilla. Si algo es grave te lo decimos, y si no lo es, también.</span><span lang="en">No bureaucratic jargon. If something is serious we tell you, and if it isn't, we tell you that too.</span></p></li>
-      <li class="rise"><span class="n">2</span><h3><span lang="es">Te respondemos hoy</span><span lang="en">We reply today</span></h3><p><span lang="es">Escríbenos por WhatsApp y te contestamos el mismo día hábil.</span><span lang="en">Message us on WhatsApp and we'll answer the same business day.</span></p></li>
+      <li class="rise"><span class="n">2</span><h3><span lang="es">Te respondemos por WhatsApp</span><span lang="en">We answer on WhatsApp</span></h3><p><span lang="es">Escríbenos con el número de tu título y te contestamos con lo que hay que hacer, sin costo.</span><span lang="en">Send us your title number and we'll reply with what needs doing, free of charge.</span></p></li>
       <li class="rise"><span class="n">3</span><h3><span lang="es">Solo lo legal</span><span lang="en">Legal only</span></h3><p><span lang="es">No movemos material sin origen comprobado. Así te protegemos a ti y a quien compra.</span><span lang="en">We don't move material without proven origin. That protects you and the buyer.</span></p></li>
     </ol>
   </div>
@@ -570,7 +570,7 @@ footer a{color:var(--verde-lt)}
       <article class="mineral rise">
         <div class="gem" aria-hidden="true"><canvas data-gem="metales"></canvas><span class="drag" hidden><span lang="es">¡gíralo!</span><span lang="en">spin it!</span></span></div>
         <h3><span lang="es">Metales: cobre y oro</span><span lang="en">Metals: copper and gold</span></h3>
-        <p><span lang="es">Comercialización con trazabilidad completa para compradores nacionales e internacionales que necesitan demostrar origen legal.</span><span lang="en">Fully traceable trading for domestic and international buyers who must prove legal origin.</span></p>
+        <p><span lang="es">Comercialización con trazabilidad completa para compradores que necesitan demostrar origen legal.</span><span lang="en">Fully traceable trading for buyers who must prove legal origin.</span></p>
         <ul><li><span lang="es">Certificado de origen</span><span lang="en">Certificate of origin</span></li><li>RUCOM</li><li><span lang="es">Análisis de laboratorio</span><span lang="en">Lab assay</span></li></ul>
       </article>
       <article class="mineral agregados rise">
@@ -634,7 +634,7 @@ footer a{color:var(--verde-lt)}
   <div class="wrap">
     <div class="rise">
       <span class="eyebrow"><span lang="es">Diagnóstico gratuito</span><span lang="en">Free assessment</span></span>
-      <h2 id="h-cta" style="margin-top:14px"><span lang="es">Cuéntanos de tu título. <em>Hoy</em> te respondemos.</span><span lang="en">Tell us about your title. We'll reply <em>today</em>.</span></h2>
+      <h2 id="h-cta" style="margin-top:14px"><span lang="es">Cuéntanos de tu título. Te decimos <em>qué hacer primero</em>.</span><span lang="en">Tell us about your title. We'll tell you <em>what to do first</em>.</span></h2>
       <p><span lang="es">Escríbenos si necesitas ayuda con un título o una licencia minera, o si quieres comprar o vender material. Revisamos tu caso y te decimos qué hacer primero, sin costo.</span><span lang="en">Message us if you need help with a mining title or license, or want to buy or sell material. We'll review your case and tell you what to do first, free of charge.</span></p>
       <div class="cta-row" style="margin-top:28px">
         <a class="btn btn-verde" data-wa href="https://wa.me/573173000807" target="_blank" rel="noopener">
@@ -675,8 +675,8 @@ footer a{color:var(--verde-lt)}
    ========================================================= */
 const CONFIG = {
   whatsapp: "573173000807",              // solo dígitos, con 57
-  rucom: "",                             // ej. "RUCOM-20240101234" — vacío muestra "en verificación"
-  regiones: [],                          // ej. ["Atlántico","Bolívar","Cesar"] — vacío muestra la sede
+  rucom: "",                             // ej. "RUCOM-20240101234" — vacío muestra "—" y "En renovación"; con número muestra "Vigente"
+  regiones: [],                          // ej. ["Atlántico","Bolívar","Cesar"] — vacío muestra "Todo Colombia"
   mensaje: {
     es: "Hola Imagine World IT, quiero un diagnóstico gratuito de mi título/licencia minera.",
     en: "Hello Imagine World IT, I'd like a free assessment of my mining title/license."
@@ -725,9 +725,7 @@ const CONFIG = {
     document.querySelector("[data-rucom]").textContent = CONFIG.rucom;
     const p = document.querySelector("[data-rucom-pill]");
     p.className = "pill ok";
-    p.innerHTML = '<span lang="es">Inscrita</span><span lang="en">Registered</span>';
-  } else {
-    document.querySelector("[data-rucom]").innerHTML = '<span lang="es">Inscrita</span><span lang="en">Registered</span>';
+    p.innerHTML = '<span lang="es">Vigente</span><span lang="en">Active</span>';
   }
   if (CONFIG.regiones.length){
     document.querySelector("[data-regiones]").textContent = CONFIG.regiones.slice(0,3).join(" · ");
