@@ -681,13 +681,15 @@ const CONFIG = {
     es: "Hola Imagine World IT, quiero un diagnóstico gratuito de mi título/licencia minera.",
     en: "Hello Imagine World IT, I'd like a free assessment of my mining title/license."
   },
-  /* Multimedia: se intenta en orden (video local → imagen local → imagen Higgsfield).
-     Si nada carga, queda la animación hecha en código. */
+  /* Multimedia por escena. Se carga solo cuando la escena se acerca a la pantalla.
+     video: lista de MP4 (vacía por ahora; ej. ["media/operacion.mp4"]). Si hay video, se usa primero.
+     image: nombre base de la imagen; deben existir <base>-800.webp y <base>-1600.webp.
+     Si nada carga, queda la animación hecha en código. El hero usa el tajo 3D cuando hay WebGL. */
   media: {
-    hero:         { video: [], image: ["media/hero.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062613_26bd9126-7be1-4822-a68e-6e5aed4321ce.png"] },
-    operacion:    { video: ["media/operacion.mp4"],    image: ["media/operacion.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062656_7804edf9-c89d-405c-87f4-1ec03a305a7f.png"] },
-    trazabilidad: { video: ["media/trazabilidad.mp4"], image: ["media/trazabilidad.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062734_e105d7c0-c1d4-49d8-b7a8-5433a798777d.png"] },
-    ambiental:    { video: ["media/ambiental.mp4"],    image: ["media/ambiental.png", "https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_063055_da44c256-930f-4800-bf80-ba2c5fa0e5d1.png"] }
+    hero:         { video: [], image: "media/hero" },
+    operacion:    { video: [], image: "media/operacion" },
+    trazabilidad: { video: [], image: "media/trazabilidad" },
+    ambiental:    { video: [], image: "media/ambiental" }
   }
 };
 
@@ -744,11 +746,13 @@ const CONFIG = {
   function selectSibling(b){ const v = b.parentElement.querySelector(".v"); if (!v) return; const r = document.createRange(); r.selectNodeContents(v); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
 
   /* ---------- multimedia con respaldo ---------- */
-  function loadImage(list, i, cb){
-    if (i >= list.length) return cb(null);
+  function loadImage(base, cb){
+    if (!base) return cb(null);
     const img = new Image(); img.decoding = "async"; img.alt = "";
-    img.onload = () => cb(img); img.onerror = () => loadImage(list, i+1, cb);
-    img.src = list[i];
+    img.sizes = "100vw";
+    img.srcset = base + "-800.webp 800w, " + base + "-1600.webp 1600w";
+    img.onload = () => cb(img); img.onerror = () => cb(null);
+    img.src = base + "-1600.webp";
   }
   function loadVideo(list, i, cb){
     if (i >= list.length) return cb(null);
@@ -759,15 +763,23 @@ const CONFIG = {
     v.addEventListener("error", () => { if (!done){ done = true; loadVideo(list, i+1, cb); } }, { once:true });
     v.src = list[i];
   }
-  document.querySelectorAll("[data-slot]").forEach(slot => {
+  function loadSlot(slot){
     const cfg = CONFIG.media[slot.dataset.slot]; if (!cfg) return;
-    if (slot.id === "hero-media" && window.THREE && webglOK()) return; // el hero usa el tajo 3D
     const mount = el => { el.style.opacity = 0; el.dataset.loaded = ""; slot.appendChild(el); requestAnimationFrame(() => requestAnimationFrame(() => el.style.opacity = 1)); slot.classList.add("has-media"); };
     loadVideo(reduce ? [] : (cfg.video||[]), 0, v => {
       if (v){ mount(v); slot._video = v; return; }
-      loadImage(cfg.image||[], 0, img => { if (img) mount(img); });
+      loadImage(cfg.image, img => { if (img) mount(img); });
     });
-  });
+  }
+  // carga perezosa: cada escena pide su imagen cuando está a ~1 pantalla de distancia
+  const slots = [...document.querySelectorAll("[data-slot]")]
+    .filter(slot => !(slot.id === "hero-media" && window.THREE && webglOK())); // el hero usa el tajo 3D
+  if ("IntersectionObserver" in window){
+    const slotIO = new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting){ slotIO.unobserve(en.target); loadSlot(en.target); }
+    }), { rootMargin: "100% 0px" });
+    slots.forEach(s => slotIO.observe(s));
+  } else slots.forEach(loadSlot);
 
   /* ---------- escenas con scroll ---------- */
   const scenes = [...document.querySelectorAll("[data-scene-section]")];

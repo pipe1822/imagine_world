@@ -6,21 +6,18 @@ ARCHIVOS
 - media/ ................ aquí van las imágenes y los videos
 - media/logo-original.png  logo anterior (como referencia; la página usa una versión vectorial del símbolo)
 
-1. DESCARGAR LAS IMÁGENES DE HIGGSFIELD A media/
-   Guarda cada imagen con este nombre exacto:
-   media/hero.png         https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062613_26bd9126-7be1-4822-a68e-6e5aed4321ce.png
-   media/operacion.png    https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062656_7804edf9-c89d-405c-87f4-1ec03a305a7f.png
-   media/trazabilidad.png https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_062734_e105d7c0-c1d4-49d8-b7a8-5433a798777d.png
-   media/ambiental.png    https://d8j0ntlcm91z4.cloudfront.net/user_3LlcXWdRKgZG52KQgOHD4NbKxX3/hf_20261107_063055_da44c256-930f-4800-bf80-ba2c5fa0e5d1.png
-   Recomendado: pásalas a WebP o JPG (ancho 1920 px, calidad 80) para que pesen menos de 400 KB cada una
-   y cambia la extensión en CONFIG.media.
-   Si no las descargas, la página intenta cargarlas directo desde Higgsfield. Si eso también falla,
-   se ve la animación hecha en código (planos topográficos, ruta de trazabilidad, flujos de agua).
+1. IMÁGENES (ya están en media/)
+   Cada escena tiene dos tamaños en WebP: <nombre>-800.webp y <nombre>-1600.webp
+   (hero, operacion, trazabilidad, ambiental). El navegador elige el tamaño según la pantalla
+   y cada imagen se descarga solo cuando su escena se acerca. Máximo 250 KB por archivo.
+   Para cambiar una imagen: genera los dos tamaños con el mismo nombre y reemplázalos.
+   Si una imagen no carga, se ve la animación hecha en código (planos topográficos, ruta de
+   trazabilidad, flujos de agua). El hero usa el tajo 3D y solo muestra su imagen sin WebGL.
 
 2. VIDEOS (cuando haya plan Basic o superior en Higgsfield)
-   Pon los clips en media/operacion.mp4, media/trazabilidad.mp4 y media/ambiental.mp4
-   (MP4 H.264, sin audio, 5-8 s, menos de 4 MB). La página los detecta sola, los reproduce en
-   bucle y los pausa cuando no están en pantalla. No hay que tocar código.
+   Pon el clip en media/ (ej. media/operacion.mp4: MP4 H.264, sin audio, 5-8 s, menos de 4 MB)
+   y agrégalo en CONFIG.media, ej. operacion: { video: ["media/operacion.mp4"], ... }.
+   Si hay video se usa en lugar de la imagen; se reproduce en bucle y se pausa fuera de pantalla.
 
 3. EDITAR DATOS (al inicio del <script> en index.html, objeto CONFIG)
    whatsapp ... 573173000807
