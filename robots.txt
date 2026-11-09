@@ -1,0 +1,18 @@
+# Imagine World IT S.A.S. — todo el sitio es público
+User-agent: *
+Allow: /
+
+# Buscadores y asistentes con IA: permitidos de forma explícita
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://imagineworldit.com.co/sitemap.xml
