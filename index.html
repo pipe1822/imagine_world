@@ -36,10 +36,18 @@
   if (l !== "es" && l !== "en") { try { l = localStorage.getItem("iwit-lang"); } catch(e){} }
   if (l === "es" || l === "en") { d.dataset.lang = l; d.lang = l; } })();
 </script>
+<!-- Fuentes: Plus Jakarta Sans (texto) va alojada en /fonts y precargada: Google entrega URLs distintas
+     según el navegador, así que precargar una de gstatic haría descargarla dos veces en algunos celulares.
+     Cinzel (títulos) y Playfair Display itálica (slogan y destacados) vienen de Google Fonts. -->
+<link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap">
 <style>
+/* Plus Jakarta Sans variable (pesos 200-800), subconjunto latino: cubre todo el español. Licencia SIL OFL 1.1. */
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:200 800;font-display:swap;
+  src:url("/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* Layout: a mine-site dossier. Dark carbon "field" bands carry the imagery (hero + 3 scroll scenes);
    light roca bands carry the paperwork (registry facts, services, process). One look, light-first, by choice. */
 :root{
@@ -57,13 +65,12 @@
   --arena:#D9D2C3;
   --linea:#E3DDD0;
   --muted:#5F625B;
-  --hand:"Caveat","Segoe Print","Bradley Hand",cursive; /* notas a mano: el toque humano */
   --radius:10px;
   --muted-dk:#A9ABA3;
   --display:"Cinzel","Trajan Pro",Georgia,serif;          /* títulos: remates clásicos, aire de joyería */
   --accent:"Playfair Display",Georgia,"Times New Roman",serif; /* itálica para slogan y palabras clave */
   --body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace; /* monoespaciada del sistema: 0 KB */
   --gutter-l:max(16px,env(safe-area-inset-left,0px));
   --gutter-r:max(16px,env(safe-area-inset-right,0px));
   --max:1200px;
@@ -132,14 +139,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero h1 em{font-size:1.08em}
 .hero h1 em{font-style:normal;color:var(--cobre-lt)}
 .hero .lead{font-size:clamp(1.05rem,1.8vw,1.25rem);max-width:54ch;color:#DADBD5}
-.slogan{font-family:var(--hand);font-weight:700;font-size:1.9rem;line-height:1;color:var(--verde-lt);display:flex;align-items:center;gap:12px;transform:rotate(-1.5deg);transform-origin:left center}
+.slogan{font-family:var(--accent);font-style:italic;font-weight:600;font-size:1.6rem;line-height:1;color:var(--verde-lt);display:flex;align-items:center;gap:12px;transform:rotate(-1.5deg);transform-origin:left center}
 .slogan::before{content:"";width:36px;height:2px;background:var(--verde)}
 /* lectura topográfica que sigue al cursor sobre el tajo 3D */
 .survey{position:absolute;z-index:0;left:0;top:0;pointer-events:none;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--roca);white-space:nowrap;
   padding:5px 9px;border-radius:6px;background:rgba(27,28,26,.72);border:1px solid rgba(217,145,90,.55);opacity:0;transition:opacity .3s ease;will-change:transform}
 .survey b{color:var(--cobre-lt);font-weight:500}
 .survey.on{opacity:1}
-.hint{display:inline-flex;align-items:center;gap:8px;font-family:var(--hand);font-size:1.3rem;color:var(--cobre-lt);line-height:1}
+.hint{display:inline-flex;align-items:center;gap:8px;font-family:var(--accent);font-style:italic;font-weight:500;font-size:1.1rem;color:var(--cobre-lt);line-height:1}
 .hint svg{width:22px;height:22px;flex:none}
 .hint .touch{display:none}
 .hint[hidden]{display:none}
@@ -220,7 +227,7 @@ section.band{padding-block:clamp(72px,10vw,128px)}
 .gem{grid-row:span 3;position:relative;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 50% 45%,#2E2F2B 0%,#1B1C1A 70%);overflow:hidden}
 .gem canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y}
 .gem canvas:active{cursor:grabbing}
-.gem .drag{position:absolute;right:10px;top:8px;font-family:var(--hand);font-size:1.05rem;color:var(--cobre-lt);pointer-events:none;transition:opacity .4s ease}
+.gem .drag{position:absolute;right:10px;top:8px;font-family:var(--accent);font-style:italic;font-weight:500;font-size:.95rem;color:var(--cobre-lt);pointer-events:none;transition:opacity .4s ease}
 .gem.touched .drag{opacity:0}
 .gem .sym{position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:#A9ABA3;pointer-events:none}
 .gem .sym b{display:block;font-family:var(--display);font-size:1.1rem;color:#F3F4F1;letter-spacing:.02em}
@@ -243,11 +250,11 @@ section.band{padding-block:clamp(72px,10vw,128px)}
 .nota h2{font-size:clamp(1.7rem,3.4vw,2.6rem);margin:10px 0 18px}
 .nota h2 em{color:var(--cobre)}
 .nota p{font-size:1.06rem;color:#3E403B;margin-bottom:14px}
-.nota .firma{font-family:var(--hand);font-size:1.7rem;color:var(--verde-ink);line-height:1.1;margin:22px 0 0}
+.nota .firma{font-family:var(--accent);font-style:italic;font-weight:500;font-size:1.4rem;color:var(--verde-ink);line-height:1.1;margin:22px 0 0}
 .nota .firma small{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
 .promesas{list-style:none;margin:0;padding:0;display:grid;gap:22px}
 .promesas li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 16px;align-items:start}
-.promesas .n{grid-row:span 2;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--hand);font-size:1.6rem;font-weight:700;color:var(--cobre);border:1.5px dashed var(--cobre)}
+.promesas .n{grid-row:span 2;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--accent);font-style:italic;font-size:1.4rem;font-weight:600;color:var(--cobre);border:1.5px dashed var(--cobre)}
 .promesas h3{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:1.12rem;font-weight:700}
 .promesas p{color:var(--muted);font-size:.98rem}
 
@@ -892,7 +899,7 @@ const CONFIG = {
     function cross(x,y,label){
       ctx.strokeStyle = `rgba(${C.roca},.5)`; ctx.lineWidth = 1; ctx.beginPath();
       ctx.moveTo(x-7,y); ctx.lineTo(x+7,y); ctx.moveTo(x,y-7); ctx.lineTo(x,y+7); ctx.stroke();
-      ctx.fillStyle = `rgba(${C.roca},.55)`; ctx.font = "11px 'JetBrains Mono', monospace"; ctx.fillText(label, x+10, y-8);
+      ctx.fillStyle = `rgba(${C.roca},.55)`; ctx.font = "11px ui-monospace, Consolas, monospace"; ctx.fillText(label, x+10, y-8);
     }
     function draw(now){
       const t = (now - t0) / 1000;
@@ -922,7 +929,7 @@ const CONFIG = {
           const on = i <= si;
           ctx.fillStyle = C.carbon; ctx.strokeStyle = on ? `rgba(${C.verdeLt},1)` : `rgba(${C.roca},.45)`; ctx.lineWidth = 2;
           ctx.beginPath(); ctx.rect(x*w-7, y*h-7, 14, 14); ctx.fill(); ctx.stroke();
-          ctx.fillStyle = on ? `rgba(${C.roca},.9)` : `rgba(${C.roca},.5)`; ctx.font = (narrow ? "600 10px" : "600 12px") + " 'JetBrains Mono', monospace";
+          ctx.fillStyle = on ? `rgba(${C.roca},.9)` : `rgba(${C.roca},.5)`; ctx.font = (narrow ? "600 10px" : "600 12px") + " ui-monospace, Consolas, monospace";
           ctx.textAlign = i === pts.length-1 ? "right" : (i === 0 ? "left" : "center");
           ctx.fillText(labels[i], x*w + (i === pts.length-1 ? 7 : i === 0 ? -7 : 0), y*h - 18); ctx.textAlign = "left";
         });
