@@ -36,17 +36,21 @@
   if (l !== "es" && l !== "en") { try { l = localStorage.getItem("iwit-lang"); } catch(e){} }
   if (l === "es" || l === "en") { d.dataset.lang = l; d.lang = l; } })();
 </script>
-<!-- Fuentes: Plus Jakarta Sans (texto) va alojada en /fonts y precargada: Google entrega URLs distintas
-     según el navegador, así que precargar una de gstatic haría descargarla dos veces en algunos celulares.
-     Cinzel (títulos) y Playfair Display itálica (slogan y destacados) vienen de Google Fonts. -->
+<!-- Fuentes: las tres van alojadas en /fonts (sin peticiones a Google antes de pintar). Plus Jakarta Sans, la del
+     texto, se precarga. Todas son variables, subconjunto latino (cubre todo el español) y con licencia SIL OFL 1.1. -->
 <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap">
 <style>
-/* Plus Jakarta Sans variable (pesos 200-800), subconjunto latino: cubre todo el español. Licencia SIL OFL 1.1. */
+/* Texto: Plus Jakarta Sans, pesos 200-800 */
 @font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:200 800;font-display:swap;
   src:url("/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Títulos: Cinzel, recortada a los pesos que se usan (600-700) */
+@font-face{font-family:"Cinzel";font-style:normal;font-weight:600 700;font-display:swap;
+  src:url("/fonts/cinzel-600-700-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Slogan y destacados: Playfair Display itálica, recortada a los pesos que se usan (500-600) */
+@font-face{font-family:"Playfair Display";font-style:italic;font-weight:500 600;font-display:swap;
+  src:url("/fonts/playfair-italic-500-600-latin.woff2") format("woff2");
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* Layout: a mine-site dossier. Dark carbon "field" bands carry the imagery (hero + 3 scroll scenes);
    light roca bands carry the paperwork (registry facts, services, process). One look, light-first, by choice. */
