@@ -803,9 +803,11 @@ const CONFIG = {
   }
   // carga perezosa: cada escena pide su imagen cuando está a ~1 pantalla de distancia
   let heroGL = null; // contexto WebGL del hero: lo crea la comprobación de soporte y Three.js lo reutiliza
-  const hasGL = webglOK();
+  // Al cargar solo se mira si el navegador conoce WebGL (gratis). Crear el contexto cuesta ~150 ms con CPU lenta,
+  // así que la comprobación real se hace cuando arranca el 3D (primer gesto o 3 s).
+  const mayGL = !!window.WebGLRenderingContext;
   const slots = [...document.querySelectorAll("[data-slot]")]
-    .filter(slot => !(slot.id === "hero-media" && hasGL)); // con WebGL el hero usa el tajo 3D (y si Three.js no carga, se pide la imagen)
+    .filter(slot => !(slot.id === "hero-media" && mayGL)); // con WebGL el hero usa el tajo 3D (si no se puede, se pide la imagen)
   if ("IntersectionObserver" in window){
     const slotIO = new IntersectionObserver(es => es.forEach(en => {
       if (en.isIntersecting){ slotIO.unobserve(en.target); loadSlot(en.target); }
@@ -959,8 +961,20 @@ const CONFIG = {
     }));
     io.observe(canvas);
   }
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => document.querySelectorAll("canvas[data-scene]").forEach(Scene));
-  else document.querySelectorAll("canvas[data-scene]").forEach(Scene);
+  // La escena del hero se dibuja de inmediato (es lo que se ve antes del 3D); las de más abajo se preparan
+  // cuando están a ~1 pantalla de distancia, igual que sus imágenes.
+  function startScenes(){
+    const all = [...document.querySelectorAll("canvas[data-scene]")];
+    all.filter(c => c.dataset.scene === "hero").forEach(Scene);
+    const rest = all.filter(c => c.dataset.scene !== "hero");
+    if (!("IntersectionObserver" in window)) return rest.forEach(Scene);
+    const sceneIO = new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting){ sceneIO.unobserve(en.target); Scene(en.target); }
+    }), { rootMargin: "100% 0px" });
+    rest.forEach(c => sceneIO.observe(c));
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(startScenes);
+  else startScenes();
 
   /* =========================================================
      3D (Three.js): tajo minero en el hero + minerales
@@ -999,10 +1013,14 @@ const CONFIG = {
     const arm = () => { timer = setTimeout(go, ms); };
     if (document.readyState === "complete") arm(); else addEventListener("load", arm, { once: true });
   }
-  if (hasGL) onFirstGestureOrIdle(() => loadThree().then(() => {
-    try { initHero3D(); } catch(e){ console.warn("hero3d", e); loadSlot(document.getElementById("hero-media")); }
-    try { initGems(); } catch(e){ console.warn("gems", e); }
-  }, () => loadSlot(document.getElementById("hero-media"))), 3000);
+  const heroMedia = document.getElementById("hero-media");
+  if (mayGL) onFirstGestureOrIdle(() => {
+    if (!webglOK()) return loadSlot(heroMedia); // el navegador conoce WebGL pero no pudo crear el contexto
+    loadThree().then(() => {
+      try { initHero3D(); } catch(e){ console.warn("hero3d", e); loadSlot(heroMedia); }
+      try { initGems(); } catch(e){ console.warn("gems", e); }
+    }, () => loadSlot(heroMedia));
+  }, 3000);
 
   function terrainH(x, z){
     // relieve general suave
