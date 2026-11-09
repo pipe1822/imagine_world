@@ -802,6 +802,7 @@ const CONFIG = {
     });
   }
   // carga perezosa: cada escena pide su imagen cuando está a ~1 pantalla de distancia
+  let heroGL = null; // contexto WebGL del hero: lo crea la comprobación de soporte y Three.js lo reutiliza
   const hasGL = webglOK();
   const slots = [...document.querySelectorAll("[data-slot]")]
     .filter(slot => !(slot.id === "hero-media" && hasGL)); // con WebGL el hero usa el tajo 3D (y si Three.js no carga, se pide la imagen)
@@ -964,9 +965,22 @@ const CONFIG = {
   /* =========================================================
      3D (Three.js): tajo minero en el hero + minerales
      ========================================================= */
-  function webglOK(){ try { const c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); } catch(e){ return false; } }
-  // Three.js se descarga después del primer pintado (evento load + momento libre del navegador) y solo si hay WebGL.
-  // Mientras tanto se ve la animación 2D del hero; si Three.js no carga, el hero muestra su imagen.
+  // Comprueba WebGL creando el contexto directamente en el canvas del hero, con los mismos atributos que pediría
+  // Three.js; initHero3D() se lo pasa al renderer. Antes se creaba un contexto de prueba y luego otro real.
+  function webglOK(){
+    if (heroGL) return true;
+    try {
+      const c = document.getElementById("hero-gl");
+      if (!c || !window.WebGLRenderingContext) return false;
+      const attrs = { alpha: false, antialias: innerWidth >= 760, depth: true, stencil: true,
+                      premultipliedAlpha: true, preserveDrawingBuffer: false, powerPreference: "default" };
+      heroGL = c.getContext("webgl2", attrs) || c.getContext("webgl", attrs);
+      return !!heroGL;
+    } catch(e){ return false; }
+  }
+  // Three.js se descarga con el primer gesto (scroll, toque, mouse o tecla) o 3 s después de cargar la página,
+  // lo que pase primero, y solo si hay WebGL. Mientras tanto se ve la animación 2D del hero;
+  // si Three.js no carga, el hero muestra su imagen.
   const THREE_URL = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
   function loadThree(){
     return new Promise((ok, ko) => {
@@ -976,14 +990,19 @@ const CONFIG = {
       document.head.appendChild(s);
     });
   }
-  function afterFirstPaint(fn){
-    const go = () => ("requestIdleCallback" in window) ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200);
-    if (document.readyState === "complete") go(); else addEventListener("load", go, { once:true });
+  // Ejecuta fn una sola vez: con el primer gesto de la persona o `ms` después del evento load.
+  function onFirstGestureOrIdle(fn, ms){
+    const evs = ["scroll", "wheel", "touchstart", "pointerdown", "pointermove", "keydown"], opts = { passive: true, capture: true };
+    let done = false, timer = 0;
+    const go = () => { if (done) return; done = true; clearTimeout(timer); evs.forEach(e => removeEventListener(e, go, opts)); fn(); };
+    evs.forEach(e => addEventListener(e, go, opts));
+    const arm = () => { timer = setTimeout(go, ms); };
+    if (document.readyState === "complete") arm(); else addEventListener("load", arm, { once: true });
   }
-  if (hasGL) afterFirstPaint(() => loadThree().then(() => {
+  if (hasGL) onFirstGestureOrIdle(() => loadThree().then(() => {
     try { initHero3D(); } catch(e){ console.warn("hero3d", e); loadSlot(document.getElementById("hero-media")); }
     try { initGems(); } catch(e){ console.warn("gems", e); }
-  }, () => loadSlot(document.getElementById("hero-media"))));
+  }, () => loadSlot(document.getElementById("hero-media"))), 3000);
 
   function terrainH(x, z){
     // relieve general suave
@@ -1006,7 +1025,7 @@ const CONFIG = {
     const canvas = document.getElementById("hero-gl"), media = document.getElementById("hero-media"), hero = document.querySelector(".hero");
     const small = innerWidth < 760;
     // "default" en vez de "high-performance": en portátiles no despierta la GPU dedicada solo por el hero
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: !small, alpha: false, powerPreference: "default" });
+    const renderer = new THREE.WebGLRenderer({ canvas, context: heroGL, antialias: !small, alpha: false, powerPreference: "default" });
     renderer.setPixelRatio(small ? 1 : Math.min(1.5, devicePixelRatio || 1)); // en celular, 1 píxel real por píxel CSS
     renderer.setClearColor(0x1B1C1A, 1);
     const scene = new THREE.Scene();
