@@ -686,7 +686,6 @@ footer a{color:var(--verde-lt)}
 </a>
 <div class="toast" id="toast" role="status" hidden></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* =========================================================
    CONFIGURACIÓN — edita aquí antes de publicar
@@ -790,8 +789,9 @@ const CONFIG = {
     });
   }
   // carga perezosa: cada escena pide su imagen cuando está a ~1 pantalla de distancia
+  const hasGL = webglOK();
   const slots = [...document.querySelectorAll("[data-slot]")]
-    .filter(slot => !(slot.id === "hero-media" && window.THREE && webglOK())); // el hero usa el tajo 3D
+    .filter(slot => !(slot.id === "hero-media" && hasGL)); // con WebGL el hero usa el tajo 3D (y si Three.js no carga, se pide la imagen)
   if ("IntersectionObserver" in window){
     const slotIO = new IntersectionObserver(es => es.forEach(en => {
       if (en.isIntersecting){ slotIO.unobserve(en.target); loadSlot(en.target); }
@@ -952,7 +952,25 @@ const CONFIG = {
      3D (Three.js): tajo minero en el hero + minerales
      ========================================================= */
   function webglOK(){ try { const c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); } catch(e){ return false; } }
-  if (window.THREE && webglOK()) { try { initHero3D(); } catch(e){ console.warn("hero3d", e); } try { initGems(); } catch(e){ console.warn("gems", e); } }
+  // Three.js se descarga después del primer pintado (evento load + momento libre del navegador) y solo si hay WebGL.
+  // Mientras tanto se ve la animación 2D del hero; si Three.js no carga, el hero muestra su imagen.
+  const THREE_URL = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+  function loadThree(){
+    return new Promise((ok, ko) => {
+      if (window.THREE) return ok();
+      const s = document.createElement("script");
+      s.src = THREE_URL; s.async = true; s.onload = ok; s.onerror = ko;
+      document.head.appendChild(s);
+    });
+  }
+  function afterFirstPaint(fn){
+    const go = () => ("requestIdleCallback" in window) ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200);
+    if (document.readyState === "complete") go(); else addEventListener("load", go, { once:true });
+  }
+  if (hasGL) afterFirstPaint(() => loadThree().then(() => {
+    try { initHero3D(); } catch(e){ console.warn("hero3d", e); loadSlot(document.getElementById("hero-media")); }
+    try { initGems(); } catch(e){ console.warn("gems", e); }
+  }, () => loadSlot(document.getElementById("hero-media"))));
 
   function terrainH(x, z){
     // relieve general suave
@@ -976,14 +994,14 @@ const CONFIG = {
     const small = innerWidth < 760;
     // "default" en vez de "high-performance": en portátiles no despierta la GPU dedicada solo por el hero
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: !small, alpha: false, powerPreference: "default" });
-    renderer.setPixelRatio(Math.min(small ? 1.25 : 1.5, devicePixelRatio || 1));
+    renderer.setPixelRatio(small ? 1 : Math.min(1.5, devicePixelRatio || 1)); // en celular, 1 píxel real por píxel CSS
     renderer.setClearColor(0x1B1C1A, 1);
     const scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0x1B1C1A, 70, 230);
     const camera = new THREE.PerspectiveCamera(42, 1, 0.5, 600);
 
     // ---- terreno
-    const SEG = small ? 96 : 160, SIZE = 260;
+    const SEG = small ? 64 : 160, SIZE = 260; // celular: ~4.200 vértices en vez de ~9.400
     const geo = new THREE.PlaneGeometry(SIZE, SIZE, SEG, SEG);
     geo.rotateX(-Math.PI/2);
     const pos = geo.attributes.position;
@@ -1216,11 +1234,17 @@ const CONFIG = {
     })).observe(canvas);
   }
 
+  // cada mineral crea su contexto WebGL solo cuando se acerca a la pantalla
   function initGems(){
-    document.querySelectorAll("canvas[data-gem]").forEach(canvas => {
+    const gemIO = new IntersectionObserver(es => es.forEach(en => {
+      if (en.isIntersecting){ gemIO.unobserve(en.target); try { initGem(en.target); } catch(e){ console.warn("gem", e); } }
+    }), { rootMargin: "300px 0px" });
+    document.querySelectorAll("canvas[data-gem]").forEach(c => gemIO.observe(c));
+  }
+  function initGem(canvas){
       const kind = canvas.dataset.gem;
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
+      renderer.setPixelRatio(innerWidth < 760 ? 1 : Math.min(2, devicePixelRatio || 1));
       renderer.setClearColor(0x000000, 0);
       const scene = new THREE.Scene();
       const cam = new THREE.PerspectiveCamera(35, 1, .1, 100); cam.position.set(0, .4, 7.8); cam.lookAt(0,0,0);
@@ -1292,7 +1316,6 @@ const CONFIG = {
         if (en.isIntersecting){ if (!running){ running = true; raf = requestAnimationFrame(frame); } }
         else { running = false; cancelAnimationFrame(raf); }
       })).observe(canvas);
-    });
   }
 
   /* inclinación 3D de las tarjetas de minerales con el mouse */
