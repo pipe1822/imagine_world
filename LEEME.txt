@@ -24,7 +24,8 @@ ARCHIVOS
    rucom ...... vacío = muestra "—" y "En renovación" (el RUCOM no está vigente). Pon el número solo cuando
                 la renovación esté aprobada; entonces muestra "Vigente".
    regiones ... vacío = muestra "Todo Colombia · sede en Barranquilla · atención en todo el país". Ej: ["Atlántico","Bolívar","Cesar"]
-   mensaje .... texto que llega prellenado al WhatsApp, en ES y EN
+   mensaje .... texto que llega prellenado al WhatsApp, en ES y EN. "general" para casi todos los botones;
+                "inversion" y "comercial" para los botones con data-wa="inversion" / data-wa="comercial"
 
 4. PUBLICAR
    Sube index.html y la carpeta media/ al mismo directorio del hosting
